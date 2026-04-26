@@ -1,0 +1,900 @@
+---
+title: "Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras"
+author: "Ebenézer Dorneles; Gustavo Scopel"
+date: "`r format(Sys.Date(), '%d de %B de %Y')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \renewcommand{\contentsname}{Sumário}
+  - \usepackage{setspace}
+  - \onehalfspacing
+geometry: margin=2.5cm
+fontsize: 12pt
+lang: pt-BR
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo      = FALSE,
+  warning   = FALSE,
+  message   = FALSE,
+  fig.pos   = "H",
+  fig.align = "center",
+  out.width = "85%"
+)
+```
+
+```{r pacotes}
+pacotes <- c("dplyr", "ggplot2", "knitr", "kableExtra",
+             "scales", "stringr", "readr")
+for (p in pacotes) {
+  if (!require(p, character.only = TRUE, quietly = TRUE)) {
+    install.packages(p, quiet = TRUE)
+    library(p, character.only = TRUE)
+  }
+}
+```
+
+\newpage
+
+# Introdução
+
+```{=html}
+<!-- ============================================================
+ESPAÇO PARA COMENTÁRIO — Introdução
+Contextualize a importância dos acidentes de trânsito como
+problema de saúde pública no Brasil, o papel da PRF no
+monitoramento e a relevância do tema. Inclua referências.
+============================================================ -->
+```
+
+Os acidentes de trânsito representam um importante problema de saúde pública no Brasil. Segundo a Organização Mundial da Saúde (OMS, 2023), aproximadamente 1,19 milhão de pessoas morrem anualmente em decorrência de sinistros viários no mundo, sendo o Brasil um dos países com maiores taxas de mortalidade nesse contexto. No âmbito nacional, os acidentes em rodovias federais se destacam pela maior gravidade, em razão das altas velocidades praticadas e das longas distâncias percorridas (IPEA, 2022). Diversos fatores contextuais estão associados à ocorrência de óbitos em sinistros de trânsito. Entre eles, a fase do dia — com maior risco durante períodos noturnos em razão da redução da visibilidade e do aumento da fadiga —, as condições meteorológicas e as características físicas da via, como o tipo de pista, são frequentemente apontados na literatura como determinantes da gravidade dos acidentes (OMS, 2023; IPEA, 2022). Nesse contexto, o presente estudo tem por objetivo analisar os fatores associados à ocorrência de óbito em sinistros de trânsito registrados pela Polícia Rodoviária Federal (PRF) no ano de 2025, considerando a fase do dia, a condição meteorológica e o tipo de pista como variáveis explicativas.
+
+# Descrição do Estudo
+
+## Fonte dos Dados
+
+Os dados utilizados neste trabalho são provenientes da base de **sinistros de trânsito registrados pela Polícia Rodoviária Federal (PRF)** no ano de 2025, disponibilizada em formato aberto pelo governo federal. O arquivo analisado (`por_pessoa_acidentes2025.csv`) contém registros individualizados por pessoa envolvida em cada sinistro ocorrido nas rodovias federais brasileiras, com informações sobre as características do acidente, das vias e das condições no momento do evento (PRF, 2025).
+
+## Delineamento do Estudo
+
+Trata-se de um **estudo transversal observacional**, no qual as informações sobre o desfecho e os fatores de interesse foram registradas no momento do sinistro, sem acompanhamento longitudinal dos indivíduos e sem qualquer intervenção por parte dos pesquisadores.
+
+## Objetivos
+
+**Objetivo geral**
+
+Analisar os fatores associados à ocorrência de óbito em sinistros de trânsito nas rodovias federais brasileiras registrados pela PRF no ano de 2025, considerando características do acidente, do ambiente e dos envolvidos.
+
+**Objetivos específicos**
+
+-   Descrever o perfil dos sinistros de trânsito segundo as variáveis de interesse;
+
+-   Avaliar a associação entre a ocorrência de óbito e as variáveis explicativas por meio de análises bivariadas;
+
+-   Estimar a magnitude da associação entre óbito e fatores selecionados (fase do dia, condição meteorológica, tipo de pista, causa do acidente, tipo de dia, sexo e tipo de veículo);
+
+-   Ajustar um modelo de regressão logística para identificar os fatores independentemente associados à ocorrência de óbito;
+
+-   Comparar os resultados das análises bivariadas e multivariadas, identificando possíveis efeitos de confusão.
+
+## Variáveis do Estudo
+
+**Variável de desfecho (Y):**
+
+-   **Sinistro fatal** (`classificacao_acidente`): variável dicotômica recodificada a partir da classificação original do acidente, assumindo valor *Sim* quando a classificação é "Com Vítimas Fatais" e *Não* quando classificado como "Com Vítimas Feridas" ou "Sem Vítimas".
+
+**Variáveis de fator (X):**
+
+-   **Fase do dia (fase_dia):** variável dicotômica recodificada em *Pleno dia* e *Outros horários* (incluindo anoitecer, plena noite e amanhecer).
+
+<!-- -->
+
+-   **Condição meteorológica (condicao_meteorologica):** variável politômica agrupada em três categorias: *Tempo bom* (céu claro e sol), *Nublado* e *Tempo adverso* (chuva, garoa, neblina, vento, neve e granizo).
+
+-   **Tipo de pista (tipo_pista):** variável politômica categorizada em *Dupla*, *Múltipla* e *Simples*.
+
+-   **Causa do acidente (causa_grupo):** variável politômica obtida a partir do agrupamento das causas originais em categorias analíticas, tais como: falha humana, falha mecânica do veículo, falha na via/infraestrutura, fatores ambientais, envolvimento de pedestres/terceiros e outros.
+
+-   **Tipo de dia (tipo_dia):** variável dicotômica classificada em *Dia útil* e *Final de semana/feriado*.
+
+-   **Sexo (sexo):** variável categórica com as categorias *Masculino*, *Feminino* e *Outro/Ignorado*.
+
+-   **Tipo de veículo (tipo_veiculo_grp):** variável politômica resultante do agrupamento dos veículos em categorias como: automóvel/veículo leve (referência), motocicleta ou similar, veículo pesado, transporte coletivo e não motorizado/especial.
+
+## Critérios de Inclusão e Exclusão
+
+Foram incluídos todos os registros com resposta válida na variável de desfecho. Registros com valores ausentes ou não informados (`NA`, `(null)`, `N/D`) nas variáveis de interesse foram excluídos das análises correspondentes e reportados nas tabelas de frequência.
+
+## Análise Estatística
+
+As análises foram realizadas no software R (R CORE TEAM, 2025). Para a descrição das variáveis foram elaboradas tabelas de frequência absoluta e relativa. A associação entre o desfecho e cada fator foi avaliada por meio do **Teste Qui-Quadrado de Pearson**, com verificação prévia das frequências esperadas; quando alguma célula apresentou frequência esperada inferior a cinco, utilizou-se o **Teste Exato de Fisher**. As medidas de associação calculadas foram o **Risco Relativo (RR)**, o **Risco Atribuível (RA)** e a **Razão de Chances (OR)**, com respectivos intervalos de confiança de 95%. Para os fatores politômicos, cada categoria foi comparada à categoria de referência. Por fim, foi ajustado um **modelo de regressão logística binária** com seleção de variáveis pelo critério AIC (*stepwise*), com diagnóstico do ajuste pelos resíduos de Pearson e deviance.
+
+\newpage
+
+# Análise Estatística
+
+```{r dados}
+dados_analise <- read_csv("dados_analise.csv")
+```
+
+## Tabelas de Frequência
+
+As tabelas a seguir apresentam a distribuição de frequência absoluta (n) e relativa (%) de cada variável analisada individualmente.
+
+### Sinistro Fatal
+
+```{r tab1}
+
+tab_fatal <- table(dados_analise$fatal)
+prop_fatal <- prop.table(tab_fatal) * 100
+
+# Criando o dataframe
+tab1 <- data.frame(
+  `Sinistro fatal` = c(names(tab_fatal), "Total"),
+  n = c(as.numeric(tab_fatal), sum(tab_fatal)),
+  `%` = c(format(round(prop_fatal, 2), nsmall = 2), "100.00"),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+# Gerando a tabela
+kable(tab1, 
+      caption = "Distribuição de frequência da variável sinistro fatal — PRF, 2025.", 
+      booktabs = TRUE, 
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(nrow(tab1), bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.", 
+           general_title = "", 
+           footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 1 -->
+
+A Tabela 1 mostra que, do total de sinistros analisados, a grande maioria não resultou em óbito. Foram registrados 175.605 casos não fatais (90,23%), enquanto 19.017 sinistros (9,77%) apresentaram pelo menos uma vítima fatal.
+
+Esse resultado indica que, embora os sinistros fatais representem uma parcela menor do total, ainda correspondem a um contingente expressivo em termos absolutos. Assim, a análise dos fatores associados à fatalidade torna-se relevante para compreender quais condições aumentam a gravidade dos acidentes e subsidiar ações de prevenção.
+
+### Fase do Dia
+
+```{r tab2}
+tab_fase_do_dia <- table(dados_analise$fase_dia_dic)
+prop_fase_do_dia <- prop.table(tab_fase_do_dia) * 100
+
+tab2 <- data.frame(
+  `Fase do dia` = c(names(tab_fase_do_dia), "Total"),
+  n = c(as.numeric(tab_fase_do_dia), sum(tab_fase_do_dia)),
+  `%` = c(round(prop_fase_do_dia, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab2,
+      caption  = "Distribuição de frequência da variável fase do dia — PRF, 2025.",
+      booktabs = TRUE, 
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(3, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 2 -->
+
+A Tabela 2 apresenta a distribuição dos sinistros segundo a fase do dia. Observa-se que a maioria dos acidentes ocorreu durante o **pleno dia**, totalizando **110.573 casos (56,81%)**, enquanto **84.049 sinistros (43,19%)** ocorreram em **outros horários** (anoitecer, noite e amanhecer).
+
+Esses resultados indicam maior concentração de ocorrências no período diurno, o que pode estar relacionado ao maior volume de tráfego nesse intervalo. No entanto, essa distribuição não reflete necessariamente a gravidade dos sinistros, sendo necessária análise adicional para avaliar a associação entre a fase do dia e a ocorrência de óbitos.
+
+### Condição Meteorológica
+
+```{r tab3}
+
+tab_condicao_met <- table(dados_analise$cond_meteo)
+prop_condicao_met <- prop.table(tab_condicao_met) * 100
+
+tab3 <- data.frame(
+  `Condição meteorológica` = c(names(tab_condicao_met), "Total"),
+  n = c(as.numeric(tab_condicao_met), sum(tab_condicao_met)),
+  `%` = c(round(prop_condicao_met, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab3,
+      caption  = "Distribuição de frequência da variável condição meteorológica — PRF, 2025.",
+      booktabs = TRUE,
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(4, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 3 -->
+
+A Tabela 3 apresenta a distribuição dos sinistros segundo a condição meteorológica no momento da ocorrência. Observa-se que a grande maioria dos acidentes ocorreu em **tempo bom**, totalizando **135.972 casos (71,33%)**. Já os sinistros em condições de **céu nublado** corresponderam a **30.494 ocorrências (16,00%)**, enquanto aqueles em **tempo adverso** representaram **24.168 casos (12,68%)**.
+
+Esses resultados sugerem que os sinistros são mais frequentes em condições climáticas favoráveis, o que pode estar relacionado à maior circulação de veículos nesses períodos. Assim como observado anteriormente, essa distribuição reflete a frequência de ocorrência, não sendo suficiente, por si só, para inferir maior ou menor gravidade dos acidentes, sendo necessária análise específica da associação com óbitos.
+
+### Tipo de Pista
+
+```{r tab4}
+tab_tipo_pista <- table(dados_analise$tipo_pista)
+prop_tipo_pista <- prop.table(tab_tipo_pista) * 100
+
+tab4 <- data.frame(
+  `Tipo de pista` = c(names(tab_tipo_pista), "Total"),
+  n = c(as.numeric(tab_tipo_pista), sum(tab_tipo_pista)),
+  `%` = c(round(prop_tipo_pista, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab4,
+      caption  = "Distribuição de frequência da variável tipo de pista — PRF, 2025.",
+      booktabs = TRUE,
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(4, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 4 -->
+
+A Tabela 4 apresenta a distribuição dos sinistros segundo o tipo de pista. Observa-se que a maioria dos acidentes ocorreu em **pistas simples**, com **100.091 registros (51,43%)**, seguidas pelas **pistas duplas**, com **77.245 casos (39,69%)**. As **pistas múltiplas** concentraram a menor proporção de ocorrências, totalizando **17.286 sinistros (8,88%)**.
+
+Esses resultados indicam maior frequência de sinistros em pistas simples, o que pode estar relacionado à maior extensão desse tipo de via na malha rodoviária ou a condições estruturais menos favoráveis. No entanto, assim como nas demais variáveis descritivas, essa distribuição não permite inferir diretamente a gravidade dos acidentes, sendo necessária análise adicional para avaliar sua associação com a ocorrência de óbitos.
+
+### Causa do acidente
+
+```{r tab5}
+
+tab_causa_grupo <- table(dados_analise$causa_grupo)
+prop_causa_grupo <- prop.table(tab_causa_grupo) * 100
+
+tab5 <- data.frame(
+  `Causa do acidente` = c(names(tab_causa_grupo), "Total"),
+  n = c(as.numeric(tab_causa_grupo), sum(tab_causa_grupo)),
+  `%` = c(round(prop_causa_grupo, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab5,
+      caption  = "Distribuição de frequência da variável causa do acidente — PRF, 2025.",
+      booktabs = TRUE,
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(4, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 5 -->
+
+A Tabela 5 apresenta a distribuição dos sinistros segundo a causa do acidente. Observa-se que a ampla maioria dos casos está relacionada à **falha humana do condutor**, com **156.267 ocorrências (80,29%)**, destacando-se como o principal fator associado aos sinistros.
+
+As demais causas apresentam proporções significativamente menores, incluindo **pedestres/terceiros** com **12.763 casos (6,56%)**, **falha mecânica do veículo** com **11.666 (5,99%)** e **falha na via/infraestrutura** com **9.693 (4,98%)**. Já os **fatores ambientais** correspondem a **3.506 ocorrências (1,80%)**, enquanto a categoria **outros** representa apenas **727 casos (0,37%)**.
+
+Esses resultados evidenciam a predominância de fatores humanos na ocorrência dos sinistros, sugerindo que comportamentos dos condutores desempenham papel central na dinâmica dos acidentes. Ainda assim, essa análise descritiva não permite avaliar a gravidade associada a cada causa, sendo necessária análise específica da relação com a ocorrência de óbitos.
+
+### Tipo dia
+
+```{r tab6}
+tab_tipo_dia <- table(dados_analise$tipo_dia)
+prop_tipo_dia <- prop.table(tab_tipo_dia) * 100
+
+tab6 <- data.frame(
+  `Tipo de dia` = c(names(tab_tipo_dia), "Total"),
+  n = c(as.numeric(tab_tipo_dia), sum(tab_tipo_dia)),
+  `%` = c(format(round(prop_tipo_dia, 2), nsmall = 2), "100.00"),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab6, 
+      caption = "Distribuição de frequência da variável tipo de dia — PRF, 2025.", 
+      booktabs = TRUE, 
+      align = "lcc", 
+      row.names = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>% 
+  row_spec(nrow(tab6), bold = TRUE) %>% # <-- A MUDANÇA ESTÁ AQUI
+  footnote(general = "Fonte: Elaborado pelos autores.", 
+           general_title = "", 
+           footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 6 -->
+
+A Tabela 6 apresenta a distribuição dos sinistros segundo o tipo de dia. Observa-se que a maioria das ocorrências ocorreu em **dias úteis**, com **129.612 registros (66,6%)**, enquanto **65.010 sinistros (33,4%)** foram registrados em **finais de semana ou feriados**.
+
+Essa distribuição sugere maior frequência de acidentes durante os dias úteis, possivelmente associada ao maior fluxo de veículos nesses períodos. No entanto, assim como nas análises anteriores, esses dados refletem apenas a frequência de ocorrência, sendo necessária análise adicional para avaliar se há diferença na gravidade dos sinistros entre os tipos de dia.
+
+### Sexo
+
+```{r tab7}
+tab_sexo <- table(dados_analise$sexo)
+prop_sexo <- prop.table(tab_sexo) * 100
+
+tab7 <- data.frame(
+  `Sexo do condutor` = c(names(tab_sexo), "Total"),
+  n = c(as.numeric(tab_sexo), sum(tab_sexo)),
+  `%` = c(round(prop_sexo, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab7,
+      caption  = "Distribuição de frequência da variável sexo — PRF, 2025.",
+      booktabs = TRUE, 
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(4, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 7 -->
+
+A Tabela 7 apresenta a distribuição dos sinistros segundo o sexo dos envolvidos. Observa-se predominância do **sexo masculino**, com **123.762 registros (63,59%)**, seguido pelo **sexo feminino**, com **41.783 casos (21,47%)**. A categoria **outro/ignorado** corresponde a **29.077 ocorrências (14,94%)**.
+
+Esses resultados indicam maior participação de indivíduos do sexo masculino nos sinistros de trânsito, o que pode estar relacionado a padrões de exposição ou comportamento no tráfego. Destaca-se também a proporção considerável de registros classificados como “outro/ignorado”, o que pode refletir limitações na coleta ou registro da informação. Assim como nas demais variáveis descritivas, essa distribuição não permite inferir diretamente a gravidade dos sinistros, sendo necessária análise específica da associação com a ocorrência de óbitos.
+
+### Tipo de veículo
+
+```{r tab8}
+tab_tipo_veiculo_grp <- table(dados_analise$tipo_veiculo_grp)
+prop_tipo_veiculo_grp <- prop.table(tab_tipo_veiculo_grp) * 100
+
+tab8 <- data.frame(
+  `Tipo de veículo` = c(names(tab_tipo_veiculo_grp), "Total"),
+  n = c(as.numeric(tab_tipo_veiculo_grp), sum(tab_tipo_veiculo_grp)),
+  `%` = c(round(prop_tipo_veiculo_grp, 2), 100),
+  check.names = FALSE,
+  row.names = NULL
+)
+
+kable(tab8,
+      caption  = "Distribuição de frequência da variável tipo de veículo — PRF, 2025.",
+      booktabs = TRUE,
+      align = "lcc",
+      row.names = FALSE) %>%
+  kable_styling(latex_options = c("hold_position", "striped"), font_size = 11) %>%
+  row_spec(4, bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 8 -->
+
+A Tabela 8 apresenta a distribuição dos sinistros segundo o tipo de veículo envolvido. Observa-se que quase metade das ocorrências envolveu **automóveis/utilitários leves**, com **92.801 casos (49,39%)**, constituindo a categoria mais frequente. Em seguida, destacam-se as **motocicletas/similares**, com **42.907 registros (22,83%)**, e os **veículos pesados**, com **41.240 ocorrências (21,95%)**.
+
+As categorias de **transporte coletivo** representam **9.064 casos (4,82%)**, enquanto os veículos **não motorizados/especiais** correspondem a uma pequena parcela, com **1.896 registros (1,01%)**.
+
+Esses resultados indicam maior concentração de sinistros envolvendo veículos leves, o que pode refletir sua maior presença na frota e no tráfego. No entanto, assim como nas demais análises descritivas, essa distribuição refere-se à frequência de ocorrência e não permite inferir diretamente a gravidade dos acidentes, sendo necessária análise adicional da associação com a ocorrência de óbitos.
+
+\newpage
+
+## Tabelas de Contingência
+
+As tabelas de contingência a seguir apresentam o cruzamento de cada fator com o desfecho, incluindo as frequências absolutas, relativas (por linha) e os totais marginais.
+
+```{r funcoes-aux}
+# ── Função: monta tabela de contingência formatada ───────────
+monta_cont <- function(tab_base, col_label) {
+  t_mg  <- addmargins(tab_base)
+  p_row <- prop.table(tab_base, margin = 1) * 100
+  p_tot <- prop.table(margin.table(tab_base, 2)) * 100
+  p_all <- rbind(p_row, p_tot)
+  data.frame(
+    VAR     = c(rownames(tab_base), "Total"),
+    nNao    = as.numeric(t_mg[, 1]),
+    nSim    = as.numeric(t_mg[, 2]),
+    nTot    = as.numeric(t_mg[, 3]),
+    pNao    = format(round(p_all[, 1], 2), nsmall = 2),
+    pSim    = format(round(p_all[, 2], 2), nsmall = 2),
+    check.names = FALSE
+  )
+}
+
+# ── Função: escolhe qui-quadrado ou Fisher ────────────────────
+desc_teste <- function(tab) {
+  fe <- suppressWarnings(chisq.test(tab)$expected)
+  if (any(fe < 5)) {
+    res <- fisher.test(tab, simulate.p.value = TRUE, B = 10000)
+    paste0("Teste Exato de Fisher, p-valor = ",
+           format.pval(res$p.value, digits = 3, eps = 0.001))
+  } else {
+    res <- suppressWarnings(chisq.test(tab))
+    gl  <- res$parameter
+    paste0("Qui-Quadrado de Pearson = ", round(res$statistic, 2),
+           ", gl = ", gl,
+           ", p-valor = ", format.pval(res$p.value, digits = 3, eps = 0.001))
+  }
+}
+
+# ── Função: medidas de associação (dicotômica) ────────────────
+medidas_dic <- function(M, ref_label, comp_label) {
+  # M: matriz 2x2, linha 1 = ref, linha 2 = comparado; col 1 = Não, col 2 = Sim
+  alpha <- 0.05; z <- qnorm(1 - alpha/2)
+  I_ref  <- M[1,2] / sum(M[1,])
+  I_comp <- M[2,2] / sum(M[2,])
+  # RR
+  RR  <- I_comp / I_ref
+  VRR <- (1-I_comp)/(sum(M[2,])*I_comp) + (1-I_ref)/(sum(M[1,])*I_ref)
+  li_RR <- exp(log(RR) - z*sqrt(VRR)); ls_RR <- exp(log(RR) + z*sqrt(VRR))
+  # RA
+  RA  <- I_comp - I_ref
+  VRA <- (1-I_comp)*I_comp/(sum(M[2,])-1) + (1-I_ref)*I_ref/(sum(M[1,])-1)
+  li_RA <- RA - z*sqrt(VRA); ls_RA <- RA + z*sqrt(VRA)
+  # OR
+  OR  <- M[2,2]*M[1,1]/(M[2,1]*M[1,2])
+  VOR <- 1/M[1,1]+1/M[1,2]+1/M[2,1]+1/M[2,2]
+  li_OR <- exp(log(OR) - z*sqrt(VOR)); ls_OR <- exp(log(OR) + z*sqrt(VOR))
+  data.frame(
+    Medida     = c("Risco Relativo (RR)", "Risco Atribuível (RA)", "Odds Ratio (OR)"),
+    Estimativa = round(c(RR, RA, OR), 4),
+    `IC 95% LI`= round(c(li_RR, li_RA, li_OR), 4),
+    `IC 95% LS`= round(c(ls_RR, ls_RA, ls_OR), 4),
+    check.names = FALSE
+  )
+}
+
+# ── Função: medidas de associação (politômica — cada cat vs ref) ──
+medidas_pol <- function(tab, ref) {
+  alpha <- 0.05; z <- qnorm(1 - alpha/2)
+  niveis <- setdiff(rownames(tab), ref)
+  do.call(rbind, lapply(niveis, function(niv) {
+    M <- tab[c(ref, niv), ]
+    I_ref  <- M[1,2] / sum(M[1,])
+    I_comp <- M[2,2] / sum(M[2,])
+    RR  <- I_comp / I_ref
+    VRR <- (1-I_comp)/(sum(M[2,])*I_comp) + (1-I_ref)/(sum(M[1,])*I_ref)
+    OR  <- M[2,2]*M[1,1]/(M[2,1]*M[1,2])
+    VOR <- 1/M[1,1]+1/M[1,2]+1/M[2,1]+1/M[2,2]
+    data.frame(
+      Categoria    = paste0(niv, " vs. ", ref),
+      RR           = round(RR, 4),
+      `IC 95% LI (RR)` = round(exp(log(RR)-z*sqrt(VRR)), 4),
+      `IC 95% LS (RR)` = round(exp(log(RR)+z*sqrt(VRR)), 4),
+      OR           = round(OR, 4),
+      `IC 95% LI (OR)` = round(exp(log(OR)-z*sqrt(VOR)), 4),
+      `IC 95% LS (OR)` = round(exp(log(OR)+z*sqrt(VOR)), 4),
+      check.names = FALSE
+    )
+  }))
+}
+```
+
+### Sinistro Fatal segundo o Tipo de Dia
+
+```{r tab9}
+t9  <- table(dados_analise$tipo_dia, dados_analise$fatal)
+df9 <- monta_cont(t9, "Tipo de dia")
+
+kable(df9, row.names = FALSE, escape = FALSE,
+      col.names = c("Tipo de dia","Não","Sim","Total","% Não","% Sim"),
+      caption  = "Tabela de contingência: sinistro fatal segundo o tipo de dia — PRF, 2025.",
+      booktabs = TRUE, align = "lccccc") %>%
+  kable_styling(latex_options = c("hold_position","striped"), font_size = 11) %>%
+  add_header_above(c(" "=1,"Sinistro fatal (n)"=3,"Sinistro fatal (%)"=2)) %>%
+  row_spec(nrow(df9), bold = TRUE) %>%
+  footnote(general = "Fonte: Elaborado pelos autores.",
+           general_title = "", footnote_as_chunk = TRUE)
+```
+
+```{r teste9, results='asis'}
+cat("**Teste de associação:**", desc_teste(t9), "\n\n")
+```
+
+**Medidas de associação** (Final de semana / feriado vs. Dia útil):
+
+```{r tab9b}
+M9 <- matrix(c(t9["Dia útil","Não"], t9["Dia útil","Sim"],
+               t9["Final de semana / feriado","Não"],
+               t9["Final de semana / feriado","Sim"]),
+             nrow=2, byrow=TRUE)
+med9 <- medidas_dic(M9, "Dia útil", "Final de semana / feriado")
+
+kable(med9, booktabs=TRUE, align="lccc", digits=4,
+      caption="Medidas de associação: sinistro fatal segundo o tipo de dia — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  footnote(general="Referência: Dia útil. Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 9 -->
+
+*[Interprete a tabela, o teste e as medidas de associação: a proporção de sinistros fatais difere entre dias úteis e finais de semana/feriados? O RR e o OR indicam maior ou menor risco nos fins de semana?]*
+
+### Sinistro Fatal segundo o Tipo de Pista
+
+```{r tab10}
+t10  <- table(dados_analise$tipo_pista, dados_analise$fatal)
+df10 <- monta_cont(t10, "Tipo de pista")
+
+kable(df10, row.names=FALSE, escape=FALSE,
+      col.names=c("Tipo de pista","Não","Sim","Total","% Não","% Sim"),
+      caption="Tabela de contingência: sinistro fatal segundo o tipo de pista — PRF, 2025.",
+      booktabs=TRUE, align="lccccc") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  add_header_above(c(" "=1,"Sinistro fatal (n)"=3,"Sinistro fatal (%)"=2)) %>%
+  row_spec(nrow(df10), bold=TRUE) %>%
+  footnote(general="Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+```{r teste10, results='asis'}
+cat("**Teste de associação:**", desc_teste(t10), "\n\n")
+```
+
+**Medidas de associação** (referência: Dupla):
+
+```{r tab10b}
+med10 <- medidas_pol(t10, "Dupla")
+
+kable(med10, booktabs=TRUE, align="lcccccc", digits=4,
+      caption="Medidas de associação: sinistro fatal segundo o tipo de pista — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  footnote(general="Referência: Dupla. Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 10 -->
+
+*[Interprete os resultados: qual tipo de pista apresenta maior proporção de óbitos? O RR e o OR confirmam essa diferença? Os IC 95% excluem o valor nulo?]*
+
+### Sinistro Fatal segundo a Causa do Acidente
+
+```{r tab11}
+t11  <- table(dados_analise$causa_grupo, dados_analise$fatal)
+df11 <- monta_cont(t11, "Causa do acidente")
+
+kable(df11, row.names=FALSE, escape=FALSE,
+      col.names=c("Causa do acidente","Não","Sim","Total","% Não","% Sim"),
+      caption="Tabela de contingência: sinistro fatal segundo a causa do acidente — PRF, 2025.",
+      booktabs=TRUE, align="lccccc", longtable=TRUE) %>%
+  kable_styling(latex_options=c("hold_position","striped","repeat_header"), font_size=11) %>%
+  add_header_above(c(" "=1,"Sinistro fatal (n)"=3,"Sinistro fatal (%)"=2)) %>%
+  row_spec(nrow(df11), bold=TRUE) %>%
+  footnote(general="Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+```{r teste11, results='asis'}
+cat("**Teste de associação:**", desc_teste(t11), "\n\n")
+```
+
+**Medidas de associação** (referência: Falha humana do condutor):
+
+```{r tab11b}
+med11 <- medidas_pol(t11, "Falha humana do condutor")
+
+kable(med11, booktabs=TRUE, align="lcccccc", digits=4,
+      caption="Medidas de associação: sinistro fatal segundo a causa do acidente — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  footnote(general="Referência: Falha humana do condutor. Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 11 -->
+
+*[Interprete os resultados: qual causa de acidente apresenta maior proporção de óbitos? As demais categorias têm risco maior ou menor que a falha humana (referência)?]*
+
+### Sinistro Fatal segundo o Sexo
+
+```{r tab12}
+t12  <- table(dados_analise$sexo, dados_analise$fatal)
+df12 <- monta_cont(t12, "Sexo")
+
+kable(df12, row.names=FALSE, escape=FALSE,
+      col.names=c("Sexo","Não","Sim","Total","% Não","% Sim"),
+      caption="Tabela de contingência: sinistro fatal segundo o sexo — PRF, 2025.",
+      booktabs=TRUE, align="lccccc") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  add_header_above(c(" "=1,"Sinistro fatal (n)"=3,"Sinistro fatal (%)"=2)) %>%
+  row_spec(nrow(df12), bold=TRUE) %>%
+  footnote(general="Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+```{r teste12, results='asis'}
+cat("**Teste de associação:**", desc_teste(t12), "\n\n")
+```
+
+**Medidas de associação** (referência: Feminino):
+
+```{r tab12b}
+med12 <- medidas_pol(t12, "Feminino")
+
+kable(med12, booktabs=TRUE, align="lcccccc", digits=4,
+      caption="Medidas de associação: sinistro fatal segundo o sexo — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  footnote(general="Referência: Feminino. Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 12 -->
+
+*[Interprete os resultados: o sexo masculino apresenta maior proporção de óbitos? O OR indica diferença relevante em relação ao feminino?]*
+
+### Sinistro Fatal segundo o Tipo de Veículo
+
+```{r tab13}
+t13  <- table(dados_analise$tipo_veiculo_grp, dados_analise$fatal)
+df13 <- monta_cont(t13, "Tipo de veículo")
+
+kable(df13, row.names=FALSE, escape=FALSE,
+      col.names=c("Tipo de veículo","Não","Sim","Total","% Não","% Sim"),
+      caption="Tabela de contingência: sinistro fatal segundo o tipo de veículo — PRF, 2025.",
+      booktabs=TRUE, align="lccccc") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  add_header_above(c(" "=1,"Sinistro fatal (n)"=3,"Sinistro fatal (%)"=2)) %>%
+  row_spec(nrow(df13), bold=TRUE) %>%
+  footnote(general="Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+```{r teste13, results='asis'}
+cat("**Teste de associação:**", desc_teste(t13), "\n\n")
+```
+
+**Medidas de associação** (referência: Automóvel / utilitário leve):
+
+```{r tab13b}
+med13 <- medidas_pol(t13, "Automóvel / utilitário leve")
+
+kable(med13, booktabs=TRUE, align="lcccccc", digits=4,
+      caption="Medidas de associação: sinistro fatal segundo o tipo de veículo — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
+  footnote(general="Referência: Automóvel / utilitário leve. Fonte: Elaborado pelos autores.",
+           general_title="", footnote_as_chunk=TRUE)
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Tabela 13 -->
+
+*[Interprete os resultados: qual tipo de veículo apresenta maior risco de óbito em relação ao automóvel/leve? Motocicletas têm RR e OR mais elevados?]*
+
+\newpage
+
+## Gráficos
+
+```{r graf-aux}
+# Função auxiliar para gráfico de barras empilhadas dinâmico
+grafico_prop <- function(dados, var, label_x, legenda = "Sinistro fatal") {
+  dados %>%
+    filter(!is.na(.data[[var]]), !is.na(fatal)) %>%
+    group_by(.data[[var]], fatal) %>%
+    summarise(n = n(), .groups = "drop") %>%
+    group_by(.data[[var]]) %>%
+    mutate(prop = n / sum(n)) %>%
+    ggplot(aes(x = .data[[var]], y = prop, fill = fatal)) +
+    geom_bar(stat = "identity", position = "fill", width = 0.6) +
+    geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
+              position = position_fill(vjust = 0.5),
+              size = 3.5, color = "white", fontface = "bold") +
+    scale_y_continuous(labels = scales::percent_format()) +
+    scale_fill_manual(values = c("Não" = "#2C7BB6", "Sim" = "#D7191C")) +
+    labs(x = label_x, y = "Proporção (%)", fill = legenda) +
+    theme_minimal(base_size = 11) +
+    theme(legend.position = "bottom",
+          panel.grid.major.x = element_blank(),
+          axis.text.x = element_text(size = 9))
+}
+```
+
+### Sinistro Fatal segundo o Tipo de Dia
+
+```{r graf1, fig.cap="Proporção de sinistro fatal segundo o tipo de dia — PRF, 2025. Fonte: Elaborado pelos autores."}
+grafico_prop(dados_analise, "tipo_dia", "Tipo de dia")
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Gráfico 1 -->
+
+*[Descreva o gráfico: a proporção de sinistros fatais é maior nos finais de semana/feriados ou nos dias úteis? A diferença é visualmente expressiva?]*
+
+### Sinistro Fatal segundo o Tipo de Pista
+
+```{r graf2, fig.cap="Proporção de sinistro fatal segundo o tipo de pista — PRF, 2025. Fonte: Elaborado pelos autores."}
+grafico_prop(dados_analise, "tipo_pista", "Tipo de pista")
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Gráfico 2 -->
+
+*[Descreva o gráfico: a diferença entre pistas simples e as demais categorias é visualmente marcante?]*
+
+### Sinistro Fatal segundo a Causa do Acidente
+
+```{r graf3, fig.cap="Proporção de sinistro fatal segundo a causa do acidente — PRF, 2025. Fonte: Elaborado pelos autores.", fig.height=4.5}
+grafico_prop(dados_analise, "causa_grupo", "Causa do acidente")
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Gráfico 3 -->
+
+*[Descreva o gráfico: qual grupo de causas concentra maior proporção de óbitos?]*
+
+### Sinistro Fatal segundo o Sexo
+
+```{r graf4, fig.cap="Proporção de sinistro fatal segundo o sexo — PRF, 2025. Fonte: Elaborado pelos autores."}
+grafico_prop(dados_analise, "sexo", "Sexo")
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Gráfico 4 -->
+
+*[Descreva o gráfico: o sexo masculino apresenta visivelmente maior proporção de óbitos?]*
+
+### Sinistro Fatal segundo o Tipo de Veículo
+
+```{r graf5, fig.cap="Proporção de sinistro fatal segundo o tipo de veículo — PRF, 2025. Fonte: Elaborado pelos autores.", fig.height=4.5}
+grafico_prop(dados_analise, "tipo_veiculo_grp", "Tipo de veículo")
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Gráfico 5 -->
+
+*[Descreva o gráfico: qual tipo de veículo apresenta maior proporção de óbitos? O padrão é coerente com as medidas de associação?]*
+
+\newpage
+
+## Regressão Logística
+
+Para avaliar o efeito conjunto dos fatores sobre a ocorrência de óbito, foi ajustado um modelo de regressão logística binária. O modelo completo incluiu todas as variáveis selecionadas. A seleção pelo critério AIC (*stepwise*) identificou o subconjunto de fatores independentemente associados ao desfecho.
+
+```{r reg-modelo}
+dados_reg <- dados_analise %>%
+  filter(!is.na(fase_dia_dic),
+         !is.na(cond_meteo),
+         !is.na(tipo_pista),
+         !is.na(causa_grupo),
+         !is.na(tipo_dia),
+         !is.na(sexo),
+         !is.na(tipo_veiculo_grp),
+         !is.na(fatal)) %>% 
+  mutate(fatal = ifelse(fatal == "Sim", 1, 0)) # Transforma em 0 e 1
+
+# Modelo completo
+ajust <- glm(fatal ~ fase_dia_dic + cond_meteo + tipo_pista + causa_grupo + tipo_dia + sexo + tipo_veiculo_grp,
+             family = binomial(link = "logit"),
+             data   = dados_reg)
+
+# Seleção stepwise
+ajust_step <- step(ajust, trace = 0)
+
+```
+
+### Coeficientes do Modelo Final
+
+```{r tab-reg}
+s    <- summary(ajust_step)$coefficients
+p_fmt <- ifelse(s[,4] < 0.001, "< 0,001",
+                format(round(s[,4], 3), nsmall = 3))
+
+tab_reg <- data.frame(
+  Variável      = rownames(s),
+  Estimativa    = round(s[,1], 4),
+  `Erro Padrão` = round(s[,2], 4),
+  `z`           = round(s[,3], 2),
+  `p-valor`     = p_fmt,
+  check.names   = FALSE
+)
+
+kable(tab_reg, booktabs=TRUE, align="lcccr", row.names=FALSE,
+      caption="Coeficientes estimados do modelo de regressão logística — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=10) %>%
+  footnote(general=paste0(
+    "Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; ",
+    "Causa = Falha humana do condutor; Sexo = Feminino; ",
+    "Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores."),
+    general_title="", footnote_as_chunk=TRUE)
+```
+
+### Odds Ratio do Modelo Final
+
+```{r tab-or}
+coefs  <- coef(ajust_step)
+ic_mod <- confint.default(ajust_step)
+OR_tab <- data.frame(
+  Variável    = names(coefs)[-1],
+  OR          = round(exp(coefs[-1]), 4),
+  `IC 95% LI` = round(exp(ic_mod[-1, 1]), 4),
+  `IC 95% LS` = round(exp(ic_mod[-1, 2]), 4),
+  check.names = FALSE
+)
+
+kable(OR_tab, booktabs=TRUE, align="lccc", row.names=FALSE,
+      caption="Odds Ratio estimados pelo modelo de regressão logística — PRF, 2025.") %>%
+  kable_styling(latex_options=c("hold_position","striped"), font_size=10) %>%
+  footnote(general=paste0(
+    "Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; ",
+    "Causa = Falha humana do condutor; Sexo = Feminino; ",
+    "Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores."),
+    general_title="", footnote_as_chunk=TRUE)
+```
+
+### Diagnóstico do Modelo
+
+```{r diagnostico, fig.cap="Resíduos de Pearson e Deviance do modelo de regressão logística — PRF, 2025. Fonte: Elaborado pelos autores.", fig.height=3.5}
+dev_res  <- residuals(ajust_step, type = "deviance")
+pear_res <- residuals(ajust_step, type = "pearson")
+gl       <- ajust_step$df.residual
+
+QL <- sum(dev_res^2);  p_dev  <- 1 - pchisq(QL, gl)
+QP <- sum(pear_res^2); p_pear <- 1 - pchisq(QP, gl)
+
+par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+plot(pear_res, pch=16, cex=0.4, ylim=c(-4,4),
+     ylab="Resíduos de Pearson", main="Pearson")
+abline(h=c(0, 2.5, -2.5), lty=c(3,3,3), col=c("black","red","red"))
+
+plot(dev_res, pch=16, cex=0.4, ylim=c(-4,4),
+     ylab="Resíduos Deviance", main="Deviance")
+abline(h=c(0, 2.5, -2.5), lty=c(3,3,3), col=c("black","red","red"))
+par(mfrow=c(1,1))
+```
+
+```{r diag-texto, results='asis'}
+cat(paste0(
+  "O qui-quadrado dos resíduos deviance resultou em ",
+  round(QL, 1), " com ", gl, " graus de liberdade (p-valor = ",
+  format.pval(p_dev, digits=3, eps=0.001), "). ",
+  "O qui-quadrado de Pearson resultou em ",
+  round(QP, 1), " com ", gl, " graus de liberdade (p-valor = ",
+  format.pval(p_pear, digits=3, eps=0.001), ").\n\n"
+))
+```
+
+<!-- ESPAÇO PARA COMENTÁRIO — Regressão Logística -->
+
+*[Interprete os resultados da regressão logística: quais variáveis permaneceram no modelo após a seleção stepwise? Quais apresentaram OR significativamente diferentes de 1? O diagnóstico de resíduos indica bom ajuste?]*
+
+\newpage
+
+# Discussão
+
+```{=html}
+<!-- ============================================================
+ESPAÇO PARA COMENTÁRIO — Discussão Geral
+============================================================ -->
+```
+
+*[Escreva aqui a discussão geral dos resultados, integrando os achados das análises de associação e da regressão logística. Considere:]*
+
+*- Qual fator apresentou associação mais forte e consistente com o óbito?*
+
+*- O grande tamanho amostral (n ≈ 195 mil) inflaciona o poder dos testes — como isso afeta a interpretação dos p-valores? Por que as medidas de efeito (RR, OR) são mais informativas?*
+
+*- Quais são as limitações do estudo (delineamento transversal, registro por pessoa e não por acidente, ausência de informações sobre velocidade, uso de cinto e álcool)?*
+
+*- Quais implicações práticas os resultados têm para políticas de segurança viária?*
+
+# Conclusão
+
+<!-- ESPAÇO PARA COMENTÁRIO — Conclusão -->
+
+*[Escreva aqui uma síntese objetiva dos resultados e da resposta aos objetivos do estudo, sem introduzir informações novas.]*
+
+\newpage
+
+# Referências
+
+WORLD HEALTH ORGANIZATION. **Global status report on road safety 2023**. Geneva: WHO, 2023. ISBN 978-92-4-008651-7. Disponível em: <https://www.who.int/publications/i/item/9789240086517>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
+\newline
+INSTITUTO DE PESQUISA ECONÔMICA APLICADA. **Acidentes de trânsito nas rodovias federais brasileiras: caracterização, tendências e custos para a sociedade**. Brasília: Ipea, 2015. Disponível em: <https://repositorio.ipea.gov.br/entities/publication/6da39885-db81-4756-ba8a-d26b6d0c0d63>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
+\newline
+POLÍCIA RODOVIÁRIA FEDERAL. **Dados abertos de acidentes em rodovias federais — 2025**. Brasília: PRF, 2025. Disponível em: <https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
+\newline
+R CORE TEAM. **R: A language and environment for statistical computing**. Vienna: R Foundation for Statistical Computing, 2025. Disponível em: <https://www.R-project.org/>.
