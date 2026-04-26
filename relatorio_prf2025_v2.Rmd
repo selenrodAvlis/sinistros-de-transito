@@ -77,7 +77,7 @@ Analisar os fatores associados à ocorrência de óbito em sinistros de trânsit
 
 -   Descrever o perfil dos sinistros de trânsito segundo as variáveis de interesse;
 
--   Avaliar a associação entre a ocorrência de óbito e as variáveis explicativas por meio de análises bivariadas;
+-   Avaliar se existe associação entre a ocorrência de óbito e as variáveis explicativas por meio de análises bivariadas;
 
 -   Estimar a magnitude da associação entre óbito e fatores selecionados (fase do dia, condição meteorológica, tipo de pista, causa do acidente, tipo de dia, sexo e tipo de veículo);
 
@@ -521,6 +521,8 @@ kable(med9, booktabs=TRUE, align="lccc", digits=4,
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 9 -->
 
 *[Interprete a tabela, o teste e as medidas de associação: a proporção de sinistros fatais difere entre dias úteis e finais de semana/feriados? O RR e o OR indicam maior ou menor risco nos fins de semana?]*
+
+A análise estatística revela que a proporção de sinistros fatais difere entre os dias úteis e os finais de semana/feriados ($p < 0,001$). Através dos dados descritivos (Tabela 9), observa-se que a letalidade é proporcionalmente maior nos finais de semana e feriados (10.99%) do que nos dias úteis (9,16%). A medida de associação do Risco Relativo (RR) de 1,20 indica que o risco de um sinistro resultar em fatalidade é 20% maior durante os fins de semana e feriados em comparação aos dias de semana. Da mesma forma, a Odds Ratio (OR) de 1,22 mostra que as chances de óbito são elevadas nesse período. Como os intervalos de confiança de 95% para ambas as medidas (RR: 1,16–1,23; OR: 1,18–1,26) não incluem o valor 1,é possível concluir que os finais de semana e feriados constituem um fator de risco para a ocorrência de sinistros fatais nas rodoviárias ferederais brasileiras.
 
 ### Sinistro Fatal segundo o Tipo de Pista
 
