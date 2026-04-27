@@ -24,4 +24,4 @@
 
 ## DOCS
 
-07 - questions.md perguntas geradas para orientação da análise
+07 - docs/questions.md perguntas geradas para orientação da análise
