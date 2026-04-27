@@ -1,5 +1,5 @@
 ---
-title: "Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras"
+title: "Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras em 2025"
 author: "Ebenézer Dorneles; Gustavo Scopel"
 date: "`r format(Sys.Date(), '%d de %B de %Y')`"
 output:
