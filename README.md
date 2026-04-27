@@ -21,3 +21,7 @@
 05 - relatorio_prf2025_v2.pdf relatório final
 
 06 - Projeto_Dados-1.pdf descrição para avaliação do projeto
+
+## DOCS
+
+07 - questions.md perguntas geradas para orientação da análise
