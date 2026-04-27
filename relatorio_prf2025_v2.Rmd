@@ -1,5 +1,5 @@
 ---
-title: "Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras"
+title: "Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras em 2025"
 author: "Ebenézer Dorneles; Gustavo Scopel"
 date: "`r format(Sys.Date(), '%d de %B de %Y')`"
 output:
@@ -550,11 +550,22 @@ cat("**Teste de associação:**", desc_teste(t10), "\n\n")
 ```{r tab10b}
 med10 <- medidas_pol(t10, "Dupla")
 
-kable(med10, booktabs=TRUE, align="lcccccc", digits=4,
-      caption="Medidas de associação: sinistro fatal segundo o tipo de pista — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
-  footnote(general="Referência: Dupla. Fonte: Elaborado pelos autores.",
-           general_title="", footnote_as_chunk=TRUE)
+caption = "Medidas de associação: sinistro fatal segundo o tipo de pista — PRF, 2025."
+
+general = "Referência: Dupla. Fonte: Elaborado pelos autores."
+
+kable(med10,
+      booktabs=TRUE,
+      align="lcccccc",
+      digits=4,
+      caption= caption) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10) %>%
+  column_spec(1,
+              width = "3cm") %>% 
+  footnote(general= general,
+           general_title="",
+           footnote_as_chunk=TRUE)
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 10 -->
@@ -587,13 +598,26 @@ cat("**Teste de associação:**", desc_teste(t11), "\n\n")
 **Medidas de associação** (referência: Falha humana do condutor):
 
 ```{r tab11b}
+library(kableExtra)
+
 med11 <- medidas_pol(t11, "Falha humana do condutor")
 
-kable(med11, booktabs=TRUE, align="lcccccc", digits=4,
-      caption="Medidas de associação: sinistro fatal segundo a causa do acidente — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
-  footnote(general="Referência: Falha humana do condutor. Fonte: Elaborado pelos autores.",
-           general_title="", footnote_as_chunk=TRUE)
+caption = "Medidas de associação: sinistro fatal segundo a causa do acidente — PRF, 2025."
+
+general = "Referência: Falha humana do condutor. Fonte: Elaborado pelos autores."
+
+kable(med11,
+      booktabs=TRUE,
+      align="lcccccc",
+      digits=4,
+      caption= caption) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10) %>%
+  column_spec(1,
+              width = "3cm") %>% 
+  footnote(general= general,
+           general_title="",
+           footnote_as_chunk=TRUE)
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 11 -->
@@ -628,11 +652,22 @@ cat("**Teste de associação:**", desc_teste(t12), "\n\n")
 ```{r tab12b}
 med12 <- medidas_pol(t12, "Feminino")
 
-kable(med12, booktabs=TRUE, align="lcccccc", digits=4,
-      caption="Medidas de associação: sinistro fatal segundo o sexo — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
-  footnote(general="Referência: Feminino. Fonte: Elaborado pelos autores.",
-           general_title="", footnote_as_chunk=TRUE)
+caption = "Medidas de associação: sinistro fatal segundo o sexo — PRF, 2025."
+  
+general = "Referência: Feminino. Fonte: Elaborado pelos autores."
+
+kable(med12,
+      booktabs=TRUE,
+      align="lcccccc",
+      digits=4,
+      caption= caption) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10) %>%
+  column_spec(1,
+              width = "3cm") %>% 
+  footnote(general= general,
+           general_title="",
+           footnote_as_chunk=TRUE)
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 12 -->
@@ -667,11 +702,22 @@ cat("**Teste de associação:**", desc_teste(t13), "\n\n")
 ```{r tab13b}
 med13 <- medidas_pol(t13, "Automóvel / utilitário leve")
 
-kable(med13, booktabs=TRUE, align="lcccccc", digits=4,
-      caption="Medidas de associação: sinistro fatal segundo o tipo de veículo — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
-  footnote(general="Referência: Automóvel / utilitário leve. Fonte: Elaborado pelos autores.",
-           general_title="", footnote_as_chunk=TRUE)
+caption = "Medidas de associação: sinistro fatal segundo o tipo de veículo — PRF, 2025."
+  
+general = "Referência: Automóvel / utilitário leve. Fonte: Elaborado pelos autores."
+
+kable(med13,
+      booktabs=TRUE,
+      align="lcccccc",
+      digits=4,
+      caption= caption) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10) %>%
+  column_spec(1,
+              width = "3cm") %>% 
+  footnote(general= general,
+           general_title="",
+           footnote_as_chunk=TRUE)
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 13 -->
@@ -812,14 +858,22 @@ tab_reg <- data.frame(
   check.names   = FALSE
 )
 
-kable(tab_reg, booktabs=TRUE, align="lcccr", row.names=FALSE,
+kable(tab_reg,
+      booktabs=TRUE,
+      align="lrrrr",
+      row.names=FALSE,
       caption="Coeficientes estimados do modelo de regressão logística — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=10) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10,
+                full_width = FALSE) %>%
+  column_spec(1, width = "5cm") %>%
   footnote(general=paste0(
     "Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; ",
     "Causa = Falha humana do condutor; Sexo = Feminino; ",
     "Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores."),
-    general_title="", footnote_as_chunk=TRUE)
+    general_title="",
+    footnote_as_chunk=FALSE,
+    threeparttable = TRUE)
 ```
 
 ### Odds Ratio do Modelo Final
@@ -835,14 +889,22 @@ OR_tab <- data.frame(
   check.names = FALSE
 )
 
-kable(OR_tab, booktabs=TRUE, align="lccc", row.names=FALSE,
+kable(OR_tab,
+      booktabs=TRUE,
+      align="lccc",
+      row.names=FALSE,
       caption="Odds Ratio estimados pelo modelo de regressão logística — PRF, 2025.") %>%
-  kable_styling(latex_options=c("hold_position","striped"), font_size=10) %>%
+  kable_styling(latex_options=c("hold_position", "striped"),
+                font_size=10,
+                full_width = FALSE) %>%
+  column_spec(1, width = "6cm") %>%
   footnote(general=paste0(
     "Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; ",
     "Causa = Falha humana do condutor; Sexo = Feminino; ",
     "Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores."),
-    general_title="", footnote_as_chunk=TRUE)
+    general_title="",
+    footnote_as_chunk=FALSE,
+    threeparttable = TRUE)
 ```
 
 ### Diagnóstico do Modelo
@@ -923,10 +985,4 @@ ESPAÇO PARA COMENTÁRIO — Discussão Geral
 
 # Referências
 
-WORLD HEALTH ORGANIZATION. **Global status report on road safety 2023**. Geneva: WHO, 2023. ISBN 978-92-4-008651-7. Disponível em: <https://www.who.int/publications/i/item/9789240086517>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
-\newline
-INSTITUTO DE PESQUISA ECONÔMICA APLICADA. **Acidentes de trânsito nas rodovias federais brasileiras: caracterização, tendências e custos para a sociedade**. Brasília: Ipea, 2015. Disponível em: <https://repositorio.ipea.gov.br/entities/publication/6da39885-db81-4756-ba8a-d26b6d0c0d63>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
-\newline
-POLÍCIA RODOVIÁRIA FEDERAL. **Dados abertos de acidentes em rodovias federais — 2025**. Brasília: PRF, 2025. Disponível em: <https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`.
-\newline
-R CORE TEAM. **R: A language and environment for statistical computing**. Vienna: R Foundation for Statistical Computing, 2025. Disponível em: <https://www.R-project.org/>.
+WORLD HEALTH ORGANIZATION. **Global status report on road safety 2023**. Geneva: WHO, 2023. ISBN 978-92-4-008651-7. Disponível em: <https://www.who.int/publications/i/item/9789240086517>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`. \newline INSTITUTO DE PESQUISA ECONÔMICA APLICADA. **Acidentes de trânsito nas rodovias federais brasileiras: caracterização, tendências e custos para a sociedade**. Brasília: Ipea, 2015. Disponível em: <https://repositorio.ipea.gov.br/entities/publication/6da39885-db81-4756-ba8a-d26b6d0c0d63>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`. \newline POLÍCIA RODOVIÁRIA FEDERAL. **Dados abertos de acidentes em rodovias federais — 2025**. Brasília: PRF, 2025. Disponível em: <https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf>. Acesso em: `r format(Sys.Date(), "%d %b. %Y")`. \newline R CORE TEAM. **R: A language and environment for statistical computing**. Vienna: R Foundation for Statistical Computing, 2025. Disponível em: <https://www.R-project.org/>.
