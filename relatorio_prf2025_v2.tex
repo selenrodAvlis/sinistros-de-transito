@@ -1,0 +1,1409 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  brazilian,
+  12pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\renewcommand{\contentsname}{Sumário}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito nas Rodovias Federais Brasileiras em 2025},
+  pdfauthor={Ebenézer Dorneles; Gustavo Scopel},
+  pdflang={pt-BR},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Fatores Associados à Ocorrência de Óbito em Sinistros de Trânsito
+nas Rodovias Federais Brasileiras em 2025}
+\author{Ebenézer Dorneles; Gustavo Scopel}
+\date{28 de abril de 2026}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\newpage
+
+\section{Introdução}\label{introduuxe7uxe3o}
+
+Os acidentes de trânsito representam um importante problema de saúde
+pública no Brasil. Segundo a Organização Mundial da Saúde (OMS, 2023),
+aproximadamente 1,19 milhão de pessoas morrem anualmente em decorrência
+de sinistros viários no mundo, sendo o Brasil um dos países com maiores
+taxas de mortalidade nesse contexto. No âmbito nacional, os acidentes em
+rodovias federais se destacam pela maior gravidade, em razão das altas
+velocidades praticadas e das longas distâncias percorridas (IPEA, 2022).
+Diversos fatores contextuais estão associados à ocorrência de óbitos em
+sinistros de trânsito. Entre eles, a fase do dia --- com maior risco
+durante períodos noturnos em razão da redução da visibilidade e do
+aumento da fadiga ---, as condições meteorológicas e as características
+físicas da via, como o tipo de pista, são frequentemente apontados na
+literatura como determinantes da gravidade dos acidentes (OMS, 2023;
+IPEA, 2022). Nesse contexto, o presente estudo tem por objetivo analisar
+os fatores associados à ocorrência de óbito em sinistros de trânsito
+registrados pela Polícia Rodoviária Federal (PRF) no ano de 2025,
+considerando a fase do dia, a condição meteorológica e o tipo de pista
+como variáveis explicativas.
+
+\section{Descrição do Estudo}\label{descriuxe7uxe3o-do-estudo}
+
+\subsection{Fonte dos Dados}\label{fonte-dos-dados}
+
+Os dados utilizados neste trabalho são provenientes da base de
+\textbf{sinistros de trânsito registrados pela Polícia Rodoviária
+Federal (PRF)} no ano de 2025, disponibilizada em formato aberto pelo
+governo federal. O arquivo analisado
+(\texttt{por\_pessoa\_acidentes2025.csv}) contém registros
+individualizados por pessoa envolvida em cada sinistro ocorrido nas
+rodovias federais brasileiras, com informações sobre as características
+do acidente, das vias e das condições no momento do evento (PRF, 2025).
+
+\subsection{Delineamento do Estudo}\label{delineamento-do-estudo}
+
+Trata-se de um \textbf{estudo transversal observacional}, no qual as
+informações sobre o desfecho e os fatores de interesse foram registradas
+no momento do sinistro, sem acompanhamento longitudinal dos indivíduos e
+sem qualquer intervenção por parte dos pesquisadores.
+
+\subsection{Objetivos}\label{objetivos}
+
+\textbf{Objetivo geral}
+
+Analisar os fatores associados à ocorrência de óbito em sinistros de
+trânsito nas rodovias federais brasileiras registrados pela PRF no ano
+de 2025, considerando características do acidente, do ambiente e dos
+envolvidos.
+
+\textbf{Objetivos específicos}
+
+\begin{itemize}
+\item
+  Descrever o perfil dos sinistros de trânsito segundo as variáveis de
+  interesse;
+\item
+  Avaliar se existe associação entre a ocorrência de óbito e as
+  variáveis explicativas por meio de análises bivariadas;
+\item
+  Estimar a magnitude da associação entre óbito e fatores selecionados
+  (fase do dia, condição meteorológica, tipo de pista, causa do
+  acidente, tipo de dia, sexo e tipo de veículo);
+\item
+  Ajustar um modelo de regressão logística para identificar os fatores
+  independentemente associados à ocorrência de óbito;
+\item
+  Comparar os resultados das análises bivariadas e multivariadas,
+  identificando possíveis efeitos de confusão.
+\end{itemize}
+
+\subsection{Variáveis do Estudo}\label{variuxe1veis-do-estudo}
+
+\textbf{Variável de desfecho (Y):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sinistro fatal} (\texttt{classificacao\_acidente}): variável
+  dicotômica recodificada a partir da classificação original do
+  acidente, assumindo valor \emph{Sim} quando a classificação é ``Com
+  Vítimas Fatais'' e \emph{Não} quando classificado como ``Com Vítimas
+  Feridas'' ou ``Sem Vítimas''.
+\end{itemize}
+
+\textbf{Variáveis de fator (X):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fase do dia (fase\_dia):} variável dicotômica recodificada em
+  \emph{Pleno dia} e \emph{Outros horários} (incluindo anoitecer, plena
+  noite e amanhecer).
+\end{itemize}
+
+\begin{itemize}
+\item
+  \textbf{Condição meteorológica (condicao\_meteorologica):} variável
+  politômica agrupada em três categorias: \emph{Tempo bom} (céu claro e
+  sol), \emph{Nublado} e \emph{Tempo adverso} (chuva, garoa, neblina,
+  vento, neve e granizo).
+\item
+  \textbf{Tipo de pista (tipo\_pista):} variável politômica categorizada
+  em \emph{Dupla}, \emph{Múltipla} e \emph{Simples}.
+\item
+  \textbf{Causa do acidente (causa\_grupo):} variável politômica obtida
+  a partir do agrupamento das causas originais em categorias analíticas,
+  tais como: falha humana, falha mecânica do veículo, falha na
+  via/infraestrutura, fatores ambientais, envolvimento de
+  pedestres/terceiros e outros.
+\item
+  \textbf{Tipo de dia (tipo\_dia):} variável dicotômica classificada em
+  \emph{Dia útil} e \emph{Final de semana/feriado}.
+\item
+  \textbf{Sexo (sexo):} variável categórica com as categorias
+  \emph{Masculino}, \emph{Feminino} e \emph{Outro/Ignorado}.
+\item
+  \textbf{Tipo de veículo (tipo\_veiculo\_grp):} variável politômica
+  resultante do agrupamento dos veículos em categorias como:
+  automóvel/veículo leve (referência), motocicleta ou similar, veículo
+  pesado, transporte coletivo e não motorizado/especial.
+\end{itemize}
+
+\subsection{Critérios de Inclusão e
+Exclusão}\label{crituxe9rios-de-inclusuxe3o-e-exclusuxe3o}
+
+Foram incluídos todos os registros com resposta válida na variável de
+desfecho. Registros com valores ausentes ou não informados (\texttt{NA},
+\texttt{(null)}, \texttt{N/D}) nas variáveis de interesse foram
+excluídos das análises correspondentes e reportados nas tabelas de
+frequência.
+
+\subsection{Análise Estatística}\label{anuxe1lise-estatuxedstica}
+
+As análises foram realizadas no software R (R CORE TEAM, 2025). Para a
+descrição das variáveis foram elaboradas tabelas de frequência absoluta
+e relativa. A associação entre o desfecho e cada fator foi avaliada por
+meio do \textbf{Teste Qui-Quadrado de Pearson}, com verificação prévia
+das frequências esperadas; quando alguma célula apresentou frequência
+esperada inferior a cinco, utilizou-se o \textbf{Teste Exato de Fisher}.
+As medidas de associação calculadas foram o \textbf{Risco Relativo
+(RR)}, o \textbf{Risco Atribuível (RA)} e a \textbf{Razão de Chances
+(OR)}, com respectivos intervalos de confiança de 95\%. Para os fatores
+politômicos, cada categoria foi comparada à categoria de referência. Por
+fim, foi ajustado um \textbf{modelo de regressão logística binária} com
+seleção de variáveis pelo critério AIC (\emph{stepwise}), com
+diagnóstico do ajuste pelos resíduos de Pearson e deviance.
+
+\newpage
+
+\section{Análise Estatística}\label{anuxe1lise-estatuxedstica-1}
+
+\subsection{Tabelas de Frequência}\label{tabelas-de-frequuxeancia}
+
+As tabelas a seguir apresentam a distribuição de frequência absoluta (n)
+e relativa (\%) de cada variável analisada individualmente.
+
+\subsubsection{Sinistro Fatal}\label{sinistro-fatal}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab1}Distribuição de frequência da variável sinistro fatal — PRF, 2025.}\\
+\toprule
+Sinistro fatal & n & \%\\
+\midrule
+\cellcolor{gray!10}{Não} & \cellcolor{gray!10}{175605} & \cellcolor{gray!10}{90.23}\\
+Sim & 19017 & 9.77\\
+\textbf{\cellcolor{gray!10}{Total}} & \textbf{\cellcolor{gray!10}{194622}} & \textbf{\cellcolor{gray!10}{100.00}}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 1 mostra que, do total de sinistros analisados, a grande
+maioria não resultou em óbito. Foram registrados 175.605 casos não
+fatais (90,23\%), enquanto 19.017 sinistros (9,77\%) apresentaram pelo
+menos uma vítima fatal.
+
+Esse resultado indica que, embora os sinistros fatais representem uma
+parcela menor do total, ainda correspondem a um contingente expressivo
+em termos absolutos. Assim, a análise dos fatores associados à
+fatalidade torna-se relevante para compreender quais condições aumentam
+a gravidade dos acidentes e subsidiar ações de prevenção.
+
+\subsubsection{Fase do Dia}\label{fase-do-dia}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab2}Distribuição de frequência da variável fase do dia — PRF, 2025.}\\
+\toprule
+Fase do dia & n & \%\\
+\midrule
+\cellcolor{gray!10}{Outros horários} & \cellcolor{gray!10}{84049} & \cellcolor{gray!10}{43.19}\\
+Pleno dia & 110573 & 56.81\\
+\textbf{\cellcolor{gray!10}{Total}} & \textbf{\cellcolor{gray!10}{194622}} & \textbf{\cellcolor{gray!10}{100.00}}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 2 apresenta a distribuição dos sinistros segundo a fase do dia.
+Observa-se que a maioria dos acidentes ocorreu durante o \textbf{pleno
+dia}, totalizando \textbf{110.573 casos (56,81\%)}, enquanto
+\textbf{84.049 sinistros (43,19\%)} ocorreram em \textbf{outros
+horários} (anoitecer, noite e amanhecer).
+
+Esses resultados indicam maior concentração de ocorrências no período
+diurno, o que pode estar relacionado ao maior volume de tráfego nesse
+intervalo. No entanto, essa distribuição não reflete necessariamente a
+gravidade dos sinistros, sendo necessária análise adicional para avaliar
+a associação entre a fase do dia e a ocorrência de óbitos.
+
+\subsubsection{Condição
+Meteorológica}\label{condiuxe7uxe3o-meteoroluxf3gica}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab3}Distribuição de frequência da variável condição meteorológica — PRF, 2025.}\\
+\toprule
+Condição meteorológica & n & \%\\
+\midrule
+\cellcolor{gray!10}{Nublado} & \cellcolor{gray!10}{30494} & \cellcolor{gray!10}{16.00}\\
+Tempo adverso & 24168 & 12.68\\
+\cellcolor{gray!10}{Tempo bom} & \cellcolor{gray!10}{135972} & \cellcolor{gray!10}{71.33}\\
+\textbf{Total} & \textbf{190634} & \textbf{100.00}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 3 apresenta a distribuição dos sinistros segundo a condição
+meteorológica no momento da ocorrência. Observa-se que a grande maioria
+dos acidentes ocorreu em \textbf{tempo bom}, totalizando \textbf{135.972
+casos (71,33\%)}. Já os sinistros em condições de \textbf{céu nublado}
+corresponderam a \textbf{30.494 ocorrências (16,00\%)}, enquanto aqueles
+em \textbf{tempo adverso} representaram \textbf{24.168 casos (12,68\%)}.
+
+Esses resultados sugerem que os sinistros são mais frequentes em
+condições climáticas favoráveis, o que pode estar relacionado à maior
+circulação de veículos nesses períodos. Assim como observado
+anteriormente, essa distribuição reflete a frequência de ocorrência, não
+sendo suficiente, por si só, para inferir maior ou menor gravidade dos
+acidentes, sendo necessária análise específica da associação com óbitos.
+
+\subsubsection{Tipo de Pista}\label{tipo-de-pista}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab4}Distribuição de frequência da variável tipo de pista — PRF, 2025.}\\
+\toprule
+Tipo de pista & n & \%\\
+\midrule
+\cellcolor{gray!10}{Dupla} & \cellcolor{gray!10}{77245} & \cellcolor{gray!10}{39.69}\\
+Múltipla & 17286 & 8.88\\
+\cellcolor{gray!10}{Simples} & \cellcolor{gray!10}{100091} & \cellcolor{gray!10}{51.43}\\
+\textbf{Total} & \textbf{194622} & \textbf{100.00}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 4 apresenta a distribuição dos sinistros segundo o tipo de
+pista. Observa-se que a maioria dos acidentes ocorreu em \textbf{pistas
+simples}, com \textbf{100.091 registros (51,43\%)}, seguidas pelas
+\textbf{pistas duplas}, com \textbf{77.245 casos (39,69\%)}. As
+\textbf{pistas múltiplas} concentraram a menor proporção de ocorrências,
+totalizando \textbf{17.286 sinistros (8,88\%)}.
+
+Esses resultados indicam maior frequência de sinistros em pistas
+simples, o que pode estar relacionado à maior extensão desse tipo de via
+na malha rodoviária ou a condições estruturais menos favoráveis. No
+entanto, assim como nas demais variáveis descritivas, essa distribuição
+não permite inferir diretamente a gravidade dos acidentes, sendo
+necessária análise adicional para avaliar sua associação com a
+ocorrência de óbitos.
+
+\subsubsection{Causa do acidente}\label{causa-do-acidente}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab5}Distribuição de frequência da variável causa do acidente — PRF, 2025.}\\
+\toprule
+Causa do acidente & n & \%\\
+\midrule
+\cellcolor{gray!10}{Falha humana do condutor} & \cellcolor{gray!10}{156267} & \cellcolor{gray!10}{80.29}\\
+Falha mecânica do veículo & 11666 & 5.99\\
+\cellcolor{gray!10}{Falha na via / infraestrutura} & \cellcolor{gray!10}{9693} & \cellcolor{gray!10}{4.98}\\
+\textbf{Fatores ambientais} & \textbf{3506} & \textbf{1.80}\\
+\cellcolor{gray!10}{Outros} & \cellcolor{gray!10}{727} & \cellcolor{gray!10}{0.37}\\
+\addlinespace
+Pedestre / terceiros & 12763 & 6.56\\
+\cellcolor{gray!10}{Total} & \cellcolor{gray!10}{194622} & \cellcolor{gray!10}{100.00}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 5 apresenta a distribuição dos sinistros segundo a causa do
+acidente. Observa-se que a ampla maioria dos casos está relacionada à
+\textbf{falha humana do condutor}, com \textbf{156.267 ocorrências
+(80,29\%)}, destacando-se como o principal fator associado aos
+sinistros.
+
+As demais causas apresentam proporções significativamente menores,
+incluindo \textbf{pedestres/terceiros} com \textbf{12.763 casos
+(6,56\%)}, \textbf{falha mecânica do veículo} com \textbf{11.666
+(5,99\%)} e \textbf{falha na via/infraestrutura} com \textbf{9.693
+(4,98\%)}. Já os \textbf{fatores ambientais} correspondem a
+\textbf{3.506 ocorrências (1,80\%)}, enquanto a categoria
+\textbf{outros} representa apenas \textbf{727 casos (0,37\%)}.
+
+Esses resultados evidenciam a predominância de fatores humanos na
+ocorrência dos sinistros, sugerindo que comportamentos dos condutores
+desempenham papel central na dinâmica dos acidentes. Ainda assim, essa
+análise descritiva não permite avaliar a gravidade associada a cada
+causa, sendo necessária análise específica da relação com a ocorrência
+de óbitos.
+
+\subsubsection{Tipo dia}\label{tipo-dia}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab6}Distribuição de frequência da variável tipo de dia — PRF, 2025.}\\
+\toprule
+Tipo de dia & n & \%\\
+\midrule
+\cellcolor{gray!10}{Dia útil} & \cellcolor{gray!10}{129612} & \cellcolor{gray!10}{66.60}\\
+Final de semana / feriado & 65010 & 33.40\\
+\textbf{\cellcolor{gray!10}{Total}} & \textbf{\cellcolor{gray!10}{194622}} & \textbf{\cellcolor{gray!10}{100.00}}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 6 apresenta a distribuição dos sinistros segundo o tipo de dia.
+Observa-se que a maioria das ocorrências ocorreu em \textbf{dias úteis},
+com \textbf{129.612 registros (66,6\%)}, enquanto \textbf{65.010
+sinistros (33,4\%)} foram registrados em \textbf{finais de semana ou
+feriados}.
+
+Essa distribuição sugere maior frequência de acidentes durante os dias
+úteis, possivelmente associada ao maior fluxo de veículos nesses
+períodos. No entanto, assim como nas análises anteriores, esses dados
+refletem apenas a frequência de ocorrência, sendo necessária análise
+adicional para avaliar se há diferença na gravidade dos sinistros entre
+os tipos de dia.
+
+\subsubsection{Sexo}\label{sexo}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab7}Distribuição de frequência da variável sexo — PRF, 2025.}\\
+\toprule
+Sexo do condutor & n & \%\\
+\midrule
+\cellcolor{gray!10}{Feminino} & \cellcolor{gray!10}{41783} & \cellcolor{gray!10}{21.47}\\
+Masculino & 123762 & 63.59\\
+\cellcolor{gray!10}{Outro / Ignorado} & \cellcolor{gray!10}{29077} & \cellcolor{gray!10}{14.94}\\
+\textbf{Total} & \textbf{194622} & \textbf{100.00}\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 7 apresenta a distribuição dos sinistros segundo o sexo dos
+envolvidos. Observa-se predominância do \textbf{sexo masculino}, com
+\textbf{123.762 registros (63,59\%)}, seguido pelo \textbf{sexo
+feminino}, com \textbf{41.783 casos (21,47\%)}. A categoria
+\textbf{outro/ignorado} corresponde a \textbf{29.077 ocorrências
+(14,94\%)}.
+
+Esses resultados indicam maior participação de indivíduos do sexo
+masculino nos sinistros de trânsito, o que pode estar relacionado a
+padrões de exposição ou comportamento no tráfego. Destaca-se também a
+proporção considerável de registros classificados como
+``outro/ignorado'', o que pode refletir limitações na coleta ou registro
+da informação. Assim como nas demais variáveis descritivas, essa
+distribuição não permite inferir diretamente a gravidade dos sinistros,
+sendo necessária análise específica da associação com a ocorrência de
+óbitos.
+
+\subsubsection{Tipo de veículo}\label{tipo-de-veuxedculo}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lcc}
+\caption{\label{tab:tab8}Distribuição de frequência da variável tipo de veículo — PRF, 2025.}\\
+\toprule
+Tipo de veículo & n & \%\\
+\midrule
+\cellcolor{gray!10}{Automóvel / utilitário leve} & \cellcolor{gray!10}{92801} & \cellcolor{gray!10}{49.39}\\
+Motocicleta / similar & 42907 & 22.83\\
+\cellcolor{gray!10}{Não motorizado / especial} & \cellcolor{gray!10}{1896} & \cellcolor{gray!10}{1.01}\\
+\textbf{Transporte coletivo} & \textbf{9064} & \textbf{4.82}\\
+\cellcolor{gray!10}{Veículo pesado} & \cellcolor{gray!10}{41240} & \cellcolor{gray!10}{21.95}\\
+\addlinespace
+Total & 187908 & 100.00\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+A Tabela 8 apresenta a distribuição dos sinistros segundo o tipo de
+veículo envolvido. Observa-se que quase metade das ocorrências envolveu
+\textbf{automóveis/utilitários leves}, com \textbf{92.801 casos
+(49,39\%)}, constituindo a categoria mais frequente. Em seguida,
+destacam-se as \textbf{motocicletas/similares}, com \textbf{42.907
+registros (22,83\%)}, e os \textbf{veículos pesados}, com \textbf{41.240
+ocorrências (21,95\%)}.
+
+As categorias de \textbf{transporte coletivo} representam \textbf{9.064
+casos (4,82\%)}, enquanto os veículos \textbf{não motorizados/especiais}
+correspondem a uma pequena parcela, com \textbf{1.896 registros
+(1,01\%)}.
+
+Esses resultados indicam maior concentração de sinistros envolvendo
+veículos leves, o que pode refletir sua maior presença na frota e no
+tráfego. No entanto, assim como nas demais análises descritivas, essa
+distribuição refere-se à frequência de ocorrência e não permite inferir
+diretamente a gravidade dos acidentes, sendo necessária análise
+adicional da associação com a ocorrência de óbitos.
+
+\newpage
+
+\subsection{Tabelas de Contingência}\label{tabelas-de-continguxeancia}
+
+As tabelas de contingência a seguir apresentam o cruzamento de cada
+fator com o desfecho, incluindo as frequências absolutas, relativas (por
+linha) e os totais marginais.
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Dia}\label{sinistro-fatal-segundo-o-tipo-de-dia}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccccc}
+\caption{\label{tab:tab9}Tabela de contingência: sinistro fatal segundo o tipo de dia — PRF, 2025.}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Sinistro fatal (n)} & \multicolumn{2}{c}{Sinistro fatal (\%)} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Tipo de dia & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\cellcolor{gray!10}{Dia útil} & \cellcolor{gray!10}{117741} & \cellcolor{gray!10}{11871} & \cellcolor{gray!10}{129612} & \cellcolor{gray!10}{90.84} & \cellcolor{gray!10}{9.16}\\
+Final de semana / feriado & 57864 & 7146 & 65010 & 89.01 & 10.99\\
+\textbf{\cellcolor{gray!10}{Total}} & \textbf{\cellcolor{gray!10}{175605}} & \textbf{\cellcolor{gray!10}{19017}} & \textbf{\cellcolor{gray!10}{194622}} & \textbf{\cellcolor{gray!10}{90.23}} & \textbf{\cellcolor{gray!10}{9.77}}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\textbf{Teste de associação:} Qui-Quadrado de Pearson = 164.83, gl = 1,
+p-valor = \textless0.001
+
+\textbf{Medidas de associação} (Final de semana / feriado vs.~Dia útil):
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccc}
+\caption{\label{tab:tab9b}Medidas de associação: sinistro fatal segundo o tipo de dia — PRF, 2025.}\\
+\toprule
+Medida & Estimativa & IC 95\% LI & IC 95\% LS\\
+\midrule
+\cellcolor{gray!10}{Risco Relativo (RR)} & \cellcolor{gray!10}{1.2002} & \cellcolor{gray!10}{1.1673} & \cellcolor{gray!10}{1.2340}\\
+Risco Atribuível (RA) & 0.0183 & 0.0155 & 0.0212\\
+\cellcolor{gray!10}{Odds Ratio (OR)} & \cellcolor{gray!10}{1.2249} & \cellcolor{gray!10}{1.1875} & \cellcolor{gray!10}{1.2634}\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Referência: Dia útil. Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\emph{{[}Interprete a tabela, o teste e as medidas de associação: a
+proporção de sinistros fatais difere entre dias úteis e finais de
+semana/feriados? O RR e o OR indicam maior ou menor risco nos fins de
+semana?{]}}
+
+A análise estatística revela que a proporção de sinistros fatais difere
+entre os dias úteis e os finais de semana/feriados (\(p < 0,001\)).
+Através dos dados descritivos (Tabela 9), observa-se que a letalidade é
+proporcionalmente maior nos finais de semana e feriados (10.99\%) do que
+nos dias úteis (9,16\%). A medida de associação do Risco Relativo (RR)
+de 1,20 indica que o risco de um sinistro resultar em fatalidade é 20\%
+maior durante os fins de semana e feriados em comparação aos dias de
+semana. Da mesma forma, a Odds Ratio (OR) de 1,22 mostra que as chances
+de óbito são elevadas nesse período. Como os intervalos de confiança de
+95\% para ambas as medidas (RR: 1,16--1,23; OR: 1,18--1,26) não incluem
+o valor 1,é possível concluir que os finais de semana e feriados
+constituem um fator de risco para a ocorrência de sinistros fatais nas
+rodoviárias ferederais brasileiras.
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Pista}\label{sinistro-fatal-segundo-o-tipo-de-pista}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccccc}
+\caption{\label{tab:tab10}Tabela de contingência: sinistro fatal segundo o tipo de pista — PRF, 2025.}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Sinistro fatal (n)} & \multicolumn{2}{c}{Sinistro fatal (\%)} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Tipo de pista & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\cellcolor{gray!10}{Dupla} & \cellcolor{gray!10}{72395} & \cellcolor{gray!10}{4850} & \cellcolor{gray!10}{77245} & \cellcolor{gray!10}{93.72} & \cellcolor{gray!10}{6.28}\\
+Múltipla & 16455 & 831 & 17286 & 95.19 & 4.81\\
+\cellcolor{gray!10}{Simples} & \cellcolor{gray!10}{86755} & \cellcolor{gray!10}{13336} & \cellcolor{gray!10}{100091} & \cellcolor{gray!10}{86.68} & \cellcolor{gray!10}{13.32}\\
+\textbf{Total} & \textbf{175605} & \textbf{19017} & \textbf{194622} & \textbf{90.23} & \textbf{9.77}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\textbf{Teste de associação:} Qui-Quadrado de Pearson = 2984.65, gl = 2,
+p-valor = \textless0.001
+
+\textbf{Medidas de associação} (referência: Dupla):
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{3cm}cccccc}
+\caption{\label{tab:tab10b}Medidas de associação: sinistro fatal segundo o tipo de pista — PRF, 2025.}\\
+\toprule
+Categoria & RR & IC 95\% LI (RR) & IC 95\% LS (RR) & OR & IC 95\% LI (OR) & IC 95\% LS (OR)\\
+\midrule
+\cellcolor{gray!10}{Múltipla vs. Dupla} & \cellcolor{gray!10}{0.7657} & \cellcolor{gray!10}{0.7127} & \cellcolor{gray!10}{0.8226} & \cellcolor{gray!10}{0.7538} & \cellcolor{gray!10}{0.6990} & \cellcolor{gray!10}{0.8129}\\
+Simples vs. Dupla & 2.1221 & 2.0563 & 2.1900 & 2.2946 & 2.2172 & 2.3747\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}Referência: Dupla. Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\emph{{[}Interprete os resultados: qual tipo de pista apresenta maior
+proporção de óbitos? O RR e o OR confirmam essa diferença? Os IC 95\%
+excluem o valor nulo?{]}}
+
+A análise dos dados revela a presença de uma associação entre a
+configuração da via e a ocorrência de óbitos nos sinistros
+(\(p < 0,001\)), refutando a hipótese de que a proporção de sinistros
+fatais seja uniforme entre as difernetes tipos de pista. Os dados
+descritivos demonstram que a pista simples apresenta a maior letalidade
+relativa (\(13,32\%\)), valor consideravelmente superior aos registrados
+em pistas duplas (\(6,28\%\)) e múltiplas (\(4,81\%\)).As medidas de
+associação confirmam essa disparidade. Para o Risco Relativo (RR), o
+valor de 2,12 para a comparação ``Simples vs.~Dupla'' indica que o risco
+de um sinistro resultar em morte é mais que o dobro (112\% superior) em
+pistas simples quando comparadas às duplas. A Odds Ratio (OR) de 2,29
+reforça essa maior chance de fatalidade. Por outro lado, a comparação
+``Múltipla vs.~Dupla'' apresenta um RR de 0,76, indicando que as pistas
+múltiplas possuem um risco 24\% menor de óbitos em relação às duplas.
+Dessa forma, o aumento no numeros de pista diminui considerravelmente o
+chances de acidentes fatais.
+
+\subsubsection{Sinistro Fatal segundo a Causa do
+Acidente}\label{sinistro-fatal-segundo-a-causa-do-acidente}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccccc}
+\caption{\label{tab:tab11}Tabela de contingência: sinistro fatal segundo a causa do acidente — PRF, 2025.}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Sinistro fatal (n)} & \multicolumn{2}{c}{Sinistro fatal (\%)} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Causa do acidente & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\endfirsthead
+\caption[]{Tabela de contingência: sinistro fatal segundo a causa do acidente — PRF, 2025. \textit{(continued)}}\\
+\toprule
+Causa do acidente & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\endlastfoot
+\cellcolor{gray!10}{Falha humana do condutor} & \cellcolor{gray!10}{141191} & \cellcolor{gray!10}{15076} & \cellcolor{gray!10}{156267} & \cellcolor{gray!10}{90.35} & \cellcolor{gray!10}{9.65}\\
+Falha mecânica do veículo & 11242 & 424 & 11666 & 96.37 & 3.63\\
+\cellcolor{gray!10}{Falha na via / infraestrutura} & \cellcolor{gray!10}{8902} & \cellcolor{gray!10}{791} & \cellcolor{gray!10}{9693} & \cellcolor{gray!10}{91.84} & \cellcolor{gray!10}{8.16}\\
+Fatores ambientais & 3250 & 256 & 3506 & 92.70 & 7.30\\
+\cellcolor{gray!10}{Outros} & \cellcolor{gray!10}{328} & \cellcolor{gray!10}{399} & \cellcolor{gray!10}{727} & \cellcolor{gray!10}{45.12} & \cellcolor{gray!10}{54.88}\\
+\addlinespace
+Pedestre / terceiros & 10692 & 2071 & 12763 & 83.77 & 16.23\\
+\textbf{\cellcolor{gray!10}{Total}} & \textbf{\cellcolor{gray!10}{175605}} & \textbf{\cellcolor{gray!10}{19017}} & \textbf{\cellcolor{gray!10}{194622}} & \textbf{\cellcolor{gray!10}{90.23}} & \textbf{\cellcolor{gray!10}{9.77}}\\*
+\end{longtable}
+\endgroup{}
+
+\textbf{Teste de associação:} Qui-Quadrado de Pearson = 2835.16, gl = 5,
+p-valor = \textless0.001
+
+\textbf{Medidas de associação} (referência: Falha humana do condutor):
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{3cm}cccccc}
+\caption{\label{tab:tab11b}Medidas de associação: sinistro fatal segundo a causa do acidente — PRF, 2025.}\\
+\toprule
+Categoria & RR & IC 95\% LI (RR) & IC 95\% LS (RR) & OR & IC 95\% LI (OR) & IC 95\% LS (OR)\\
+\midrule
+\cellcolor{gray!10}{Falha mecânica do veículo vs. Falha humana do condutor} & \cellcolor{gray!10}{0.3767} & \cellcolor{gray!10}{0.3427} & \cellcolor{gray!10}{0.4141} & \cellcolor{gray!10}{0.3532} & \cellcolor{gray!10}{0.3201} & \cellcolor{gray!10}{0.3897}\\
+Falha na via / infraestrutura vs. Falha humana do condutor & 0.8459 & 0.7899 & 0.9058 & 0.8322 & 0.7723 & 0.8966\\
+\cellcolor{gray!10}{Fatores ambientais vs. Falha humana do condutor} & \cellcolor{gray!10}{0.7568} & \cellcolor{gray!10}{0.6720} & \cellcolor{gray!10}{0.8524} & \cellcolor{gray!10}{0.7377} & \cellcolor{gray!10}{0.6488} & \cellcolor{gray!10}{0.8387}\\
+Outros vs. Falha humana do condutor & 5.6888 & 5.3168 & 6.0868 & 11.3925 & 9.8347 & 13.1971\\
+\cellcolor{gray!10}{Pedestre / terceiros vs. Falha humana do condutor} & \cellcolor{gray!10}{1.6819} & \cellcolor{gray!10}{1.6124} & \cellcolor{gray!10}{1.7545} & \cellcolor{gray!10}{1.8140} & \cellcolor{gray!10}{1.7256} & \cellcolor{gray!10}{1.9070}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}Referência: Falha humana do condutor. Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\emph{{[}Interprete os resultados: qual causa de acidente apresenta
+maior proporção de óbitos? As demais categorias têm risco maior ou menor
+que a falha humana (referência)?{]}}
+
+A análise estatística evidencia uma associação importante entre a causa
+presumida do acidente e a letalidade do evento (\(p < 0,001\)),
+indicando que a proporção de sinistros fatais difere drasticamente entre
+as categorias. Utilizando a falha humana do condutor como referência
+(com \(9,65\%\) de óbitos), observa-se que as falhas mecânicas
+(\(RR = 0,37\)), a infraestrutura da via (\(RR = 0,84\)) e os fatores
+ambientais (\(RR = 0,75\)) representam um menor risco relativo de morte.
+Por outro lado, o envolvimento de pedestres ou terceiros aumenta o risco
+de fatalidade em \(68\%\) (\(RR = 1,68\)), e a categoria ``Outros''
+demonstra o cenário mais severo, com um risco \(5,6\) vezes maior
+(\(RR = 5,68\)) em relação à falha humana, nescessitando de futuras
+análise para comprender quais podem ser suas principais influencias.
+
+\subsubsection{Sinistro Fatal segundo o
+Sexo}\label{sinistro-fatal-segundo-o-sexo}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccccc}
+\caption{\label{tab:tab12}Tabela de contingência: sinistro fatal segundo o sexo — PRF, 2025.}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Sinistro fatal (n)} & \multicolumn{2}{c}{Sinistro fatal (\%)} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Sexo & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\cellcolor{gray!10}{Feminino} & \cellcolor{gray!10}{38305} & \cellcolor{gray!10}{3478} & \cellcolor{gray!10}{41783} & \cellcolor{gray!10}{91.68} & \cellcolor{gray!10}{8.32}\\
+Masculino & 112213 & 11549 & 123762 & 90.67 & 9.33\\
+\cellcolor{gray!10}{Outro / Ignorado} & \cellcolor{gray!10}{25087} & \cellcolor{gray!10}{3990} & \cellcolor{gray!10}{29077} & \cellcolor{gray!10}{86.28} & \cellcolor{gray!10}{13.72}\\
+\textbf{Total} & \textbf{175605} & \textbf{19017} & \textbf{194622} & \textbf{90.23} & \textbf{9.77}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\textbf{Teste de associação:} Qui-Quadrado de Pearson = 641.22, gl = 2,
+p-valor = \textless0.001
+
+\textbf{Medidas de associação} (referência: Feminino):
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{3cm}cccccc}
+\caption{\label{tab:tab12b}Medidas de associação: sinistro fatal segundo o sexo — PRF, 2025.}\\
+\toprule
+Categoria & RR & IC 95\% LI (RR) & IC 95\% LS (RR) & OR & IC 95\% LI (OR) & IC 95\% LS (OR)\\
+\midrule
+\cellcolor{gray!10}{Masculino vs. Feminino} & \cellcolor{gray!10}{1.1211} & \cellcolor{gray!10}{1.0811} & \cellcolor{gray!10}{1.1624} & \cellcolor{gray!10}{1.1335} & \cellcolor{gray!10}{1.0895} & \cellcolor{gray!10}{1.1794}\\
+Outro / Ignorado vs. Feminino & 1.6485 & 1.5792 & 1.7208 & 1.7517 & 1.6693 & 1.8381\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}Referência: Feminino. Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\emph{{[}Interprete os resultados: o sexo masculino apresenta maior
+proporção de óbitos? O OR indica diferença relevante em relação ao
+feminino?{]}}
+
+Os resultados indicam uma associação entre o gênero e a letalidade dos
+sinistros (\(p < 0,001\)), confirmando que a proporção de óbitos não é
+diferente entre os gêneros. O sexo masculino apresenta uma proporção de
+óbitos superior (\(9,33\%\)) à observada no sexo feminino (\(8,32\%\)).
+Embora a diferença absoluta pareça pequena (\(9,33\%\) vs.~\(8,32\%\)),
+o teste Qui-Quadrado revela consistencia estatistica para quantificar a
+diferença não ser fruto do acaso. Pelas medidas de associação, o Risco
+Relativo (RR) de \(1,12\) indica que homens possuem um risco \(12\%\)
+maior de envolvimento em sinitros fatais do que mulheres. A Razão de
+Chances (OR) de \(1,13\) corrobora com essa disparidade, indicando que a
+chance de óbito é relevantemente maior para o grupo masculino.
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Veículo}\label{sinistro-fatal-segundo-o-tipo-de-veuxedculo}
+
+\begingroup\fontsize{11}{13}\selectfont
+
+\begin{longtable}[t]{lccccc}
+\caption{\label{tab:tab13}Tabela de contingência: sinistro fatal segundo o tipo de veículo — PRF, 2025.}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Sinistro fatal (n)} & \multicolumn{2}{c}{Sinistro fatal (\%)} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Tipo de veículo & Não & Sim & Total & \% Não & \% Sim\\
+\midrule
+\cellcolor{gray!10}{Automóvel / utilitário leve} & \cellcolor{gray!10}{86049} & \cellcolor{gray!10}{6752} & \cellcolor{gray!10}{92801} & \cellcolor{gray!10}{92.72} & \cellcolor{gray!10}{7.28}\\
+Motocicleta / similar & 40322 & 2585 & 42907 & 93.98 & 6.02\\
+\cellcolor{gray!10}{Não motorizado / especial} & \cellcolor{gray!10}{1641} & \cellcolor{gray!10}{255} & \cellcolor{gray!10}{1896} & \cellcolor{gray!10}{86.55} & \cellcolor{gray!10}{13.45}\\
+Transporte coletivo & 7091 & 1973 & 9064 & 78.23 & 21.77\\
+\cellcolor{gray!10}{Veículo pesado} & \cellcolor{gray!10}{35566} & \cellcolor{gray!10}{5674} & \cellcolor{gray!10}{41240} & \cellcolor{gray!10}{86.24} & \cellcolor{gray!10}{13.76}\\
+\addlinespace
+\textbf{Total} & \textbf{170669} & \textbf{17239} & \textbf{187908} & \textbf{90.83} & \textbf{9.17}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\textbf{Teste de associação:} Qui-Quadrado de Pearson = 3719.01, gl = 4,
+p-valor = \textless0.001
+
+\textbf{Medidas de associação} (referência: Automóvel / utilitário
+leve):
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{3cm}cccccc}
+\caption{\label{tab:tab13b}Medidas de associação: sinistro fatal segundo o tipo de veículo — PRF, 2025.}\\
+\toprule
+Categoria & RR & IC 95\% LI (RR) & IC 95\% LS (RR) & OR & IC 95\% LI (OR) & IC 95\% LS (OR)\\
+\midrule
+\cellcolor{gray!10}{Motocicleta / similar vs. Automóvel / utilitário leve} & \cellcolor{gray!10}{0.8280} & \cellcolor{gray!10}{0.7925} & \cellcolor{gray!10}{0.8652} & \cellcolor{gray!10}{0.8170} & \cellcolor{gray!10}{0.7796} & \cellcolor{gray!10}{0.8562}\\
+Não motorizado / especial vs. Automóvel / utilitário leve & 1.8485 & 1.6453 & 2.0769 & 1.9804 & 1.7316 & 2.2649\\
+\cellcolor{gray!10}{Transporte coletivo vs. Automóvel / utilitário leve} & \cellcolor{gray!10}{2.9918} & \cellcolor{gray!10}{2.8593} & \cellcolor{gray!10}{3.1304} & \cellcolor{gray!10}{3.5460} & \cellcolor{gray!10}{3.3538} & \cellcolor{gray!10}{3.7491}\\
+Veículo pesado vs. Automóvel / utilitário leve & 1.8910 & 1.8290 & 1.9551 & 2.0331 & 1.9585 & 2.1106\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}Referência: Automóvel / utilitário leve. Fonte: Elaborado pelos autores.}\\
+\end{longtable}
+\endgroup{}
+
+\emph{{[}Interprete os resultados: qual tipo de veículo apresenta maior
+risco de óbito em relação ao automóvel/leve? Motocicletas têm RR e OR
+mais elevados?{]}}
+
+Os resultados do estudo demonstram uma associação entre o tipo de
+veículo e a letalidade dos sinistros (\(p < 0,001\)), evidenciando que a
+natureza do veículo é um fator determinante sobre a gravidade do aidente
+e na sobrevivência dos envolvidos. O transporte coletivo apresenta o
+maior risco de óbito em relação ao automóvel leve, com uma taxa de
+fatalidade de \(21,77\%\) e um Risco Relativo (RR) de \(2,99\),
+indicando que o risco de morte é aproximadamente o triplo em comparação
+aos veículos leves. Já as motocicletas, nesta base de dados, não
+apresentam RR e OR mais elevados; pelo contrário, possuem um risco
+\(17\%\) menor (\(RR = 0,83\)) do que os automóveis. Os veículos pesados
+e não motorizados também apresentam riscos elevados, com probabilidades
+de óbito aproximadamente \(89\%\) e \(85\%\) superiores utilitários
+leves, respectivamente. Portanto, o RR e o OR indicam que o risco é
+significativamente maior para ocupantes de transporte coletivo e
+veículos pesados, enquanto as motocicletas e automóveis figuram com
+índices comparativamente menores de letalidade nesta analise.
+
+\newpage
+
+\subsection{Gráficos}\label{gruxe1ficos}
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Dia}\label{sinistro-fatal-segundo-o-tipo-de-dia-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/graf1-1} 
+
+}
+
+\caption{Proporção de sinistro fatal segundo o tipo de dia — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:graf1}
+\end{figure}
+
+\emph{{[}Descreva o gráfico: a proporção de sinistros fatais é maior nos
+finais de semana/feriados ou nos dias úteis? A diferença é visualmente
+expressiva?{]}}
+
+A figura 1 derivado dos dados estatísticos do intem 3.2.1 revela que a
+proporção de sinistros fatais é maior nos finais de semana e feriados,
+atingindo \(10,99\%\), enquanto nos dias úteis esse índice é de
+\(9,16\%\). Embora a variação absoluta seja de aproximadamente \(1,83\)
+pontos percentuais, a diferença representa um aumento relativo de quase
+\(20\%\) no risco de óbito. Essa disparidade sugere que, apesar de os
+dias úteis concentrarem o maior volume total de sinistros, as
+ocorrências em finais de semana e feriados tendem a apresentar uma
+gravidade superior, resultando em uma maior taxa de letalidade por
+evento.
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Pista}\label{sinistro-fatal-segundo-o-tipo-de-pista-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/graf2-1} 
+
+}
+
+\caption{Proporção de sinistro fatal segundo o tipo de pista — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:graf2}
+\end{figure}
+
+\emph{{[}Descreva o gráfico: a diferença entre pistas simples e as
+demais categorias é visualmente marcante?{]}}
+
+A figura 2 reflete uma disparidade na gravidade dos sinistros conforme o
+tipo da pista. A barra correspondente à pista simples se destaca de
+forma isolada, registrando uma proporção de óbitos de \(13,32\%\), valor
+que é mais que o dobro da letalidade observada em pistas duplas
+(\(6,28\%\)) e quase o triplo das pistas múltiplas (\(4,81\%\)). Essa
+diferença é visualmente observada, criando um nítida diferença que
+separa a pista simples das demais categorias. Dessa forma, as pistas
+duplas e múltiplas ofereçem uma segurança relativa maior devido à
+separação de fluxos, a pista simples configura-se como o cenário de
+maior criticidade, onde a probabilidade de um sinistro ser fatal é
+dramaticamente superior.
+
+\subsubsection{Sinistro Fatal segundo a Causa do
+Acidente}\label{sinistro-fatal-segundo-a-causa-do-acidente-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/graf3-1} 
+
+}
+
+\caption{Proporção de sinistro fatal segundo a causa do acidente — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:graf3}
+\end{figure}
+
+\emph{{[}Descreva o gráfico: qual grupo de causas concentra maior
+proporção de óbitos?{]}}
+
+O gráfico evidencia uma disparidade entre as diferentes causas de
+sinistros, com o grupo ``Outros'' concentrando a maior proporção de
+óbitos, atingindo impressionantes 54,88\%. Essa barra domina visualmente
+a escala do gráfico, indicando que os eventos classificados nessa
+categoria possuem uma gravidade desproporcional em relação às demais e
+concentram situações importante que merecem maior atenção em análises
+mais detalhadas. Em seguida, destaca-se o grupo Pedestre/terceiros, com
+uma taxa de fatalidade de 16,23\%, o que reforça a vulnerabilidade
+extrema de usuários não motorizados no trânsito, superando
+significativamente a média geral de 9,77\%. No extremo oposto, a falha
+mecânica apresenta a menor barra de letalidade (3,63\%), sugerindo que,
+embora perigosos, esses incidentes tendem a resultar em óbitos com
+frequência muito menor do que aqueles que envolvem o fator humano direto
+ou a vulnerabilidade física de pedestres.
+
+\subsubsection{Sinistro Fatal segundo o
+Sexo}\label{sinistro-fatal-segundo-o-sexo-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/graf4-1} 
+
+}
+
+\caption{Proporção de sinistro fatal segundo o sexo — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:graf4}
+\end{figure}
+
+\emph{{[}Descreva o gráfico: o sexo masculino apresenta visivelmente
+maior proporção de óbitos?{]}}
+
+O gráfico ilustra que o sexo masculino apresenta uma proporção de óbitos
+superior (\(9,33\%\)) à observada no sexo feminino (\(8,32\%\)). Embora
+essa diferença de \(1,01\) ponto percentual entre os gêneros visualmente
+pouco clara, as analises observadas em 3.2.4 mostra a consistencias dos
+dados observado nesse gráfico são relevantes. Portanto, a representação
+visual acompanhada pelo analise estatistica é nescessária para confirma
+a maior vulnerabilidade masculina em relação à feminina. Vale rerssaltar
+que o maior índice de fatalidade proporcional ocorre nos casos com
+preenchimento de gênero incompleto ou alternativo, distanciando-se
+consideravelmente das médias dos demais grupos.
+
+\subsubsection{Sinistro Fatal segundo o Tipo de
+Veículo}\label{sinistro-fatal-segundo-o-tipo-de-veuxedculo-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/graf5-1} 
+
+}
+
+\caption{Proporção de sinistro fatal segundo o tipo de veículo — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:graf5}
+\end{figure}
+
+\emph{{[}Descreva o gráfico: qual tipo de veículo apresenta maior
+proporção de óbitos? O padrão é coerente com as medidas de
+associação?{]}}
+
+A figura 5 evidencia que o transporte coletivo o maior cenário de
+gravidade, apresentando a maior proporção de óbitos com 21,77\%, o que o
+isola como o grupo de maior criticidade. Esse padrão visual é coerente
+com as medidas de associação, especialmente considerando que o
+transporte coletivo apresentou o maior Risco Relativo (RR = 2,99) e a
+maior Odds Ratio (OR = 3,54) na análise detalhada. A representação
+gráfica traduz com precisão a severidade indicada pela estatística:
+enquanto automóveis e motocicletas apresentam as menores proporções de
+letalidade (7,28\% e 6,02\%, respectivamente), os veículos pesados e não
+motorizados formam um segundo bloco de alto risco, ambos superando os
+13\%. Assim, o gráfico ratifica que a massa do veículo e a
+vulnerabilidade do usuário são os principais divisores de águas entre um
+sinistro apenas com danos e uma fatalidade.
+
+\newpage
+
+\subsection{Regressão Logística}\label{regressuxe3o-loguxedstica}
+
+Para avaliar o efeito conjunto dos fatores sobre a ocorrência de óbito,
+foi ajustado um modelo de regressão logística binária. O modelo completo
+incluiu todas as variáveis selecionadas. A seleção pelo critério AIC
+(\emph{stepwise}) identificou o subconjunto de fatores independentemente
+associados ao desfecho.
+
+\subsubsection{Coeficientes do Modelo
+Final}\label{coeficientes-do-modelo-final}
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\item Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; Causa = Falha humana do condutor; Sexo = Feminino; Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores.
+\end{TableNotes}
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{5cm}rrrr}
+\caption{\label{tab:tab-reg}Coeficientes estimados do modelo de regressão logística — PRF, 2025.}\\
+\toprule
+Variável & Estimativa & Erro Padrão & z & p-valor\\
+\midrule
+\cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{-2.8479} & \cellcolor{gray!10}{0.0291} & \cellcolor{gray!10}{-97.92} & \cellcolor{gray!10}{< 0,001}\\
+fase\_dia\_dicPleno dia & -0.5670 & 0.0170 & -33.44 & < 0,001\\
+\cellcolor{gray!10}{cond\_meteoTempo adverso} & \cellcolor{gray!10}{-0.0424} & \cellcolor{gray!10}{0.0322} & \cellcolor{gray!10}{-1.31} & \cellcolor{gray!10}{0.189}\\
+cond\_meteoTempo bom & 0.0414 & 0.0231 & 1.80 & 0.072\\
+\cellcolor{gray!10}{tipo\_pistaMúltipla} & \cellcolor{gray!10}{-0.2345} & \cellcolor{gray!10}{0.0433} & \cellcolor{gray!10}{-5.42} & \cellcolor{gray!10}{< 0,001}\\
+\addlinespace
+tipo\_pistaSimples & 0.8343 & 0.0193 & 43.13 & < 0,001\\
+\cellcolor{gray!10}{causa\_grupoFalha mecânica do veículo} & \cellcolor{gray!10}{-1.1477} & \cellcolor{gray!10}{0.0525} & \cellcolor{gray!10}{-21.86} & \cellcolor{gray!10}{< 0,001}\\
+causa\_grupoFalha na via / infraestrutura & -0.2853 & 0.0421 & -6.78 & < 0,001\\
+\cellcolor{gray!10}{causa\_grupoFatores ambientais} & \cellcolor{gray!10}{-0.2692} & \cellcolor{gray!10}{0.0710} & \cellcolor{gray!10}{-3.79} & \cellcolor{gray!10}{< 0,001}\\
+causa\_grupoOutros & 2.2192 & 0.0918 & 24.17 & < 0,001\\
+\addlinespace
+\cellcolor{gray!10}{causa\_grupoPedestre / terceiros} & \cellcolor{gray!10}{0.3165} & \cellcolor{gray!10}{0.0324} & \cellcolor{gray!10}{9.78} & \cellcolor{gray!10}{< 0,001}\\
+tipo\_diaFinal de semana / feriado & 0.1902 & 0.0175 & 10.84 & < 0,001\\
+\cellcolor{gray!10}{tipo\_veiculo\_grpMotocicleta / similar} & \cellcolor{gray!10}{-0.0864} & \cellcolor{gray!10}{0.0247} & \cellcolor{gray!10}{-3.49} & \cellcolor{gray!10}{< 0,001}\\
+tipo\_veiculo\_grpNão motorizado / especial & 0.6539 & 0.0708 & 9.23 & < 0,001\\
+\cellcolor{gray!10}{tipo\_veiculo\_grpTransporte coletivo} & \cellcolor{gray!10}{1.1640} & \cellcolor{gray!10}{0.0301} & \cellcolor{gray!10}{38.68} & \cellcolor{gray!10}{< 0,001}\\
+\addlinespace
+tipo\_veiculo\_grpVeículo pesado & 0.7683 & 0.0200 & 38.40 & < 0,001\\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+\endgroup{}
+
+\subsubsection{Odds Ratio do Modelo
+Final}\label{odds-ratio-do-modelo-final}
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\item Referências: Tipo de dia = Dia útil; Tipo de pista = Dupla; Causa = Falha humana do condutor; Sexo = Feminino; Veículo = Automóvel / utilitário leve. Fonte: Elaborado pelos autores.
+\end{TableNotes}
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{6cm}ccc}
+\caption{\label{tab:tab-or}Odds Ratio estimados pelo modelo de regressão logística — PRF, 2025.}\\
+\toprule
+Variável & OR & IC 95\% LI & IC 95\% LS\\
+\midrule
+\cellcolor{gray!10}{fase\_dia\_dicPleno dia} & \cellcolor{gray!10}{0.5672} & \cellcolor{gray!10}{0.5487} & \cellcolor{gray!10}{0.5864}\\
+cond\_meteoTempo adverso & 0.9585 & 0.8999 & 1.0210\\
+\cellcolor{gray!10}{cond\_meteoTempo bom} & \cellcolor{gray!10}{1.0423} & \cellcolor{gray!10}{0.9962} & \cellcolor{gray!10}{1.0905}\\
+tipo\_pistaMúltipla & 0.7910 & 0.7266 & 0.8610\\
+\cellcolor{gray!10}{tipo\_pistaSimples} & \cellcolor{gray!10}{2.3032} & \cellcolor{gray!10}{2.2175} & \cellcolor{gray!10}{2.3922}\\
+\addlinespace
+causa\_grupoFalha mecânica do veículo & 0.3174 & 0.2863 & 0.3518\\
+\cellcolor{gray!10}{causa\_grupoFalha na via / infraestrutura} & \cellcolor{gray!10}{0.7518} & \cellcolor{gray!10}{0.6923} & \cellcolor{gray!10}{0.8164}\\
+causa\_grupoFatores ambientais & 0.7640 & 0.6648 & 0.8780\\
+\cellcolor{gray!10}{causa\_grupoOutros} & \cellcolor{gray!10}{9.2000} & \cellcolor{gray!10}{7.6846} & \cellcolor{gray!10}{11.0142}\\
+causa\_grupoPedestre / terceiros & 1.3723 & 1.2879 & 1.4622\\
+\addlinespace
+\cellcolor{gray!10}{tipo\_diaFinal de semana / feriado} & \cellcolor{gray!10}{1.2095} & \cellcolor{gray!10}{1.1687} & \cellcolor{gray!10}{1.2519}\\
+tipo\_veiculo\_grpMotocicleta / similar & 0.9173 & 0.8739 & 0.9628\\
+\cellcolor{gray!10}{tipo\_veiculo\_grpNão motorizado / especial} & \cellcolor{gray!10}{1.9230} & \cellcolor{gray!10}{1.6737} & \cellcolor{gray!10}{2.2094}\\
+tipo\_veiculo\_grpTransporte coletivo & 3.2028 & 3.0193 & 3.3974\\
+\cellcolor{gray!10}{tipo\_veiculo\_grpVeículo pesado} & \cellcolor{gray!10}{2.1562} & \cellcolor{gray!10}{2.0732} & \cellcolor{gray!10}{2.2424}\\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+\endgroup{}
+
+\subsubsection{Diagnóstico do Modelo}\label{diagnuxf3stico-do-modelo}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.85\linewidth]{relatorio_prf2025_v2_files/figure-latex/diagnostico-1} 
+
+}
+
+\caption{Resíduos de Pearson e Deviance do modelo de regressão logística — PRF, 2025. Fonte: Elaborado pelos autores.}\label{fig:diagnostico}
+\end{figure}
+
+O qui-quadrado dos resíduos deviance resultou em 103518.6 com 184068
+graus de liberdade (p-valor = 1). O qui-quadrado de Pearson resultou em
+182051.7 com 184068 graus de liberdade (p-valor = 1).
+
+\emph{{[}Interprete os resultados da regressão logística: quais
+variáveis permaneceram no modelo após a seleção stepwise? Quais
+apresentaram OR significativamente diferentes de 1? O diagnóstico de
+resíduos indica bom ajuste?{]}}
+
+O modelo inicial foi especificado com sete preditores: fase do dia
+(fase\_dia\_dic), condição meterológica (cond\_meteo), Tipo de pista
+(tipo\_pista), Causa do acidente (causa\_grupo), tipo do dia
+(tipo\_dia), genero (sexo) e tipo do veiculo (tipo\_veiculo\_grp). O log
+de saída revela, contudo, que o modelo final mantido pelo algoritmo de
+seleção algorítmica (stepwise) excluiu a variável sexo. A exclusão da
+sexo em um procedimento de seleção baseada em critérios de informação
+(AIC) indica que, quando ajustada pelas demais covariáveis do modelo, a
+variável sexo não agregou poder preditivo ou explicativo
+estatisticamente significativo à deviance do modelo. Em termos práticos,
+a letalidade do sinistro é muito mais governada pelas condições do
+ambiente, da via e do veículo do que pelo gênero dos envolvidos,
+principalmetne quando estas outras variáveis estão sendo fatores de
+controle dentro do modelo. As demais seis variáveis permaneceram no
+modelo final, todas apresentando significância estatística global no
+teste de Analysis of Deviance (p \textless{} 0,001).
+
+A avaliação do ajuste global do modelo é baseada na Análise de Deviance.
+O modelo nulo (sem nenhum preditor) apresentava uma deviance de 112.200
+(para 184.083 graus de liberdade). Após a inclusão das variáveis
+selecionadas, a deviance residual caiu para 103.500 (com 184.068 graus
+de liberdade). Esta redução de deviance (aprox. 8.700 unidades ao custo
+de 15 graus de liberdade) sinaliza que o modelo multivariado explica uma
+parcela importante da variabilidade dos dados em relação ao modelo
+basal. Além disso, a razão entre a deviance residual e os graus de
+liberdade residuais (103500 / 184068 ≈ 0,56) indica a ausência de
+superdispersão (overdispersion), confirmando que a adoção da família
+binomial com função de ligação logit foi adequada para a natureza dos
+dados. A tabela de ANOVA sequencial demonstra que cada bloco de
+variáveis inserido contribuiu para o ajuste final (p \textless{} 0,001).
+
+A partir dos coeficientes logísticos (estimativas) pode-se obter os Odds
+Ratios (OR), que mensuram a magnitude e a direção do efeito de cada
+categoria em relação à sua categoria de referência. As variáveis
+apresentaram diferentes graus de importancia em aumentar a chance do
+acidente ser fatal. Os acidentes em Pista Simples possuem chance 2,3
+vezes maior de fatalidade (OR = 2,30; IC: 2,21 - 2,39). Este é um
+reflexo clássico de colisões frontais devido a ultrapassagens em vias
+sem divisão física devido a diferença de trafegabilidade ao longo dos
+trajetos. Quanto ao tipo de veiculos, alguns dos efeitos podem alto
+indice de gradidade em acidentes . O Transporte Coletivo multiplica a
+chance de fatalidade em 3,2 (OR = 3,20), enquanto Veículos Pesados
+multiplicam por 2,15 (OR = 2,15). Acidentes envolvendo veículos Não
+motorizados / especiais (como bicicletas) também apresentam alta
+letalidade (OR = 1,92), denunciando a vulnerabilidade física destes
+usuários. A categoria ``Outros'' disparou com o maior risco relativo do
+modelo (OR = 9,20). Isso frequentemente engloba causas complexas não
+categorizadas ou falhas humanas gravíssimas (como excesso de velocidade
+extremo, embriaguez ou sono). As causas envolvendo Pedestre/terceiros
+também aumentam a chance de óbito em 37\% (OR = 1,37). Quando camparamos
+ao tipo de dia, a chance de ocorrer em Final de semana / feriado aumenta
+o risco de letalidade em cerca de 21\% (OR = 1,20), o que se alinha na
+literatura à direção associada a atividades recreativas, possível
+consumo de álcool e velocidades médias mais elevadas em vias vazias.
+
+Dentre as variáveis que apresentam chances reduzidas de letalidade
+destacan-se as ocorrida em pleno dia, condição de pista multipla e
+sinistros causados por falhas mecanicas ou na infraestrutura das vias. A
+ocorrência em Pleno dia atua como um forte fator de diminuição de chance
+de óbito, com aproximadamente 43\% menor (OR = 0,56) do que em acidentes
+noturnos ou de baixa visibilidade (baseline do modelo). Acidentes em
+Pista Múltipla têm chance diminuição de 21\% de letalidade (OR = 0,79) e
+curiosamente, sinistros causados por Falha mecânica do veículo (OR =
+0,31), Falha na via/infraestrutura (OR = 0,75) ou Fatores ambientais (OR
+= 0,76) geram menor chance de óbito. Do ponto de vista da engenharia de
+tráfego, isso ocorre porque falhas mecânicas ou ambientais forçam uma
+redução na velocidade de trafego e na agressividade da condução; a
+energia cinética dissipada no eventual impacto é menor, reduzindo a
+letalidade do trauma, possivelmente.
+
+A variável Condição Meteorológica (Tempo adverso e Tempo bom) apresentou
+p-valor de 0,189 e 0,072, e seus ICs contêm a nulidade (1,00). Apesar de
+a categoria macro ter ajudado no ajuste inicial do modelo, os subníveis
+específicos não diferem estaticamente em sua influência letal adotada
+pelo modelo. As Motocicletas/similares tambem apresentaram um leve
+efeito protetor relativo (OR = 0,91). Embora motociclistas sejam
+vulneráveis, elas se envolvem em um volume massivo de sinistros de baixa
+energia (quedas e escoriações) que não resultam em morte, diluindo a
+proporção de letalidade específica quando ajustado pelas colisões mais
+pesadas.
+
+\newpage
+
+\section{Discussão}\label{discussuxe3o}
+
+\emph{{[}Escreva aqui a discussão geral dos resultados, integrando os
+achados das análises de associação e da regressão logística.
+Considere:{]}}
+
+\emph{- Qual fator apresentou associação mais forte e consistente com o
+óbito?}
+
+\emph{- O grande tamanho amostral (n ≈ 195 mil) inflaciona o poder dos
+testes --- como isso afeta a interpretação dos p-valores? Por que as
+medidas de efeito (RR, OR) são mais informativas?}
+
+\emph{- Quais são as limitações do estudo (delineamento transversal,
+registro por pessoa e não por acidente, ausência de informações sobre
+velocidade, uso de cinto e álcool)?}
+
+\emph{- Quais implicações práticas os resultados têm para políticas de
+segurança viária?}
+
+\emph{Destaques para serem discutidos: A Urgência da Segregação de Fluxo
+(Pista Simples); A magnitude da letalidade atrelada a Transporte
+Coletivo e Veículos Pesados, Iluminação e Fiscalização concentrar-se
+fora da luz do dia e nos finais de semana; Vulnerabilidade para veículos
+especiais/não motorizados}
+
+A presente investigação analisou uma expressiva amostra de acidentes
+rodoviários (\(n \approx 195.000\)) com o objetivo de identificar e
+quantificar os determinantes da letalidade no trânsito. Os achados
+revelam que, embora a falha humana atue como o gatilho predominante para
+a ocorrência dos sinistros, a gravidade do desfecho --- culminando em
+óbito --- é majoritariamente governada por leis da física aplicadas ao
+tráfego: a massa dos veículos envolvidos, a dissipação de energia
+cinética em vias não segregadas e as condições do ambiente de condução.
+
+Do ponto de vista metodológico, é imperativo contextualizar a
+interpretação dos valores de p frente à magnitude do banco de dados. Em
+amostras dessa proporção, o alto poder estatístico tende a identificar
+qualquer divergência mínima entre proporções como altamente
+significativa (\(p < 0,001\)). Por essa razão, a mera rejeição da
+hipótese nula oferece pouca utilidade para a formulação de políticas
+públicas. A força motriz desta discussão assenta-se, portanto, nas
+medidas de tamanho de efeito, especificamente o Risco Relativo (RR) e a
+Razão de Chances (OR) derivados do modelo de regressão logística. Essas
+métricas permitem isolar o efeito independente de cada covariável e
+traduzir o risco em uma linguagem aplicável à engenharia de tráfego e à
+saúde pública, distinguindo o que é apenas estatisticamente detectável
+daquilo que é epidemiologicamente letal.
+
+O modelo de regressão logística ajustado elucidou quais fatores
+apresentam a associação mais robusta com os óbitos. A variável
+categorizada como causa ``Outros'' disparou como o fator de risco mais
+forte (OR = 9,20). Embora inespecífica na nomenclatura do registro
+primário, na fenomenologia do trânsito essa categoria atua
+frequentemente como um ``repositório'' para falhas humanas gravíssimas
+ou comportamentos de altíssimo risco não capturados pelas definições
+padronizadas, tais como velocidades extremas, evasão de fiscalização e
+condução sob forte efeito de entorpecentes. A exclusão da variável
+``sexo'' pelo algoritmo stepwise (critério AIC) reforça uma premissa
+vital: a letalidade do acidente não é um fenômeno demográfico em sua
+essência. Embora a estatística descritiva aponte que os homens se
+envolvem mais em acidentes (63,59\%) e possuam um risco bivariado
+levemente maior de óbito, o modelo multivariado demonstra que, quando
+equalizamos as condições do veículo, da pista e do horário, o gênero
+deixa de agregar poder explicativo sobre a morte. A letalidade é
+determinada pelo ambiente e pela máquina, e não pelo sexo do condutor.
+
+Dentre as variáveis estruturais, o tipo de veículo revelou-se um dos
+preditores mais dramáticos da letalidade. O envolvimento de transporte
+coletivo eleva a chance de óbito em mais de três vezes (OR = 3,20),
+enquanto os veículos pesados a multiplicam por 2,15 (OR = 2,15). Esse
+achado evidencia a severidade da transferência de energia cinética em
+colisões envolvendo massas desproporcionais. O elevado risco do
+transporte coletivo também reflete a multiplicidade de vítimas
+potenciais em um único evento catastrófico. Em paralelo, os veículos não
+motorizados ou especiais apresentaram alta vulnerabilidade (OR = 1,92),
+denunciando o risco atrelado à ausência de chassi protetor para esses
+usuários frente ao tráfego motorizado. Por outro lado, o aparente efeito
+``protetor'' das motocicletas (OR = 0,91) não deve ser mal interpretado.
+Ele é um artefato estatístico gerado pela natureza dos dados: o volume
+maciço de quedas e colisões de baixa velocidade envolvendo motociclistas
+infla o denominador com traumas ortopédicos e escoriações não fatais,
+diluindo a taxa específica de letalidade quando ajustada para o modelo
+global.
+
+O delineamento viário consolidou-se como um fator crítico. Sinistros em
+pistas simples apresentam chances 2,3 vezes maiores de resultarem em
+morte (OR = 2,30) em comparação com as pistas múltiplas, que atuam como
+fator protetor (OR = 0,79). Essa disparidade traduz a letalidade
+incontestável das colisões frontais. Pistas simples congregam tráfegos
+em sentidos opostos sem barreira física, frequentemente impulsionando
+manobras de ultrapassagem em trechos de visibilidade restrita. Do ponto
+de vista da infraestrutura, a conversão de rotas de alto fluxo em pistas
+duplas ou múltiplas (segregação de fluxo) não é apenas uma melhoria
+logística, mas a intervenção de engenharia com maior potencial de
+mitigação de mortes na malha rodoviária analisada.
+
+Um dos achados mais contra-intuitivos --- porém amplamente respaldado
+pela literatura de segurança viária --- é a redução da letalidade em
+acidentes causados por falhas mecânicas (OR = 0,31), falhas de
+infraestrutura (OR = 0,75) ou fatores ambientais (OR = 0,76). Longe de
+sugerir que vias esburacadas ou carros com defeitos são ``seguros'',
+esse fenômeno descreve um mecanismo de adaptação comportamental
+(homeostase de risco). Diante de condições adversas explícitas, os
+condutores tendem a reduzir a velocidade de cruzeiro e aumentar o nível
+de atenção. Consequentemente, quando o acidente ocorre sob essas
+circunstâncias, a energia dissipada no impacto é sensivelmente menor,
+favorecendo a sobrevivência dos ocupantes.
+
+O período em que o sinistro ocorre reflete diretamente na gravidade do
+trauma. A ocorrência em pleno dia atua como um forte redutor das chances
+de fatalidade (OR = 0,56). Em contrapartida, os acidentes noturnos, de
+amanhecer ou entardecer sofrem com a limitação da acuidade visual
+humana, tempos de reação prolongados e, frequentemente, taxas mais altas
+de fadiga e embriaguez. Esse quadro é agravado aos finais de semana e
+feriados (OR = 1,20). Historicamente, esses períodos concentram viagens
+com finalidade recreativa, o que se associa a um coquetel perigoso: vias
+mais livres que propiciam o excesso de velocidade associadas a uma maior
+incidência do consumo de álcool.
+
+Os resultados convergem para diretrizes claras de gestão de segurança
+viária baseadas em evidências:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Engenharia: A urgência em priorizar recursos para a duplicação de
+  rodovias de pista simples com altos índices de acidentalidade,
+  mitigando as colisões frontais.
+\item
+  \textbf{Fiscalização:} Redirecionamento estratégico do policiamento
+  ostensivo. O efetivo e os radares devem ser intensificados fora da luz
+  do dia e nos finais de semana/feriados, períodos onde o comportamento
+  de risco prevalece e a severidade dos acidentes é maior.
+\item
+  \textbf{Regulação e Transporte:} Implementação de regras mais rígidas
+  para o transporte coletivo e de carga, envolvendo manutenção
+  preventiva obrigatória, controle rigoroso de jornada dos motoristas e
+  a criação de faixas exclusivas ou horários restritos de circulação em
+  trechos críticos para segregar o tráfego pesado dos utilitários leves.
+\end{enumerate}
+
+É fundamental reconhecer as limitações inerentes ao escopo da pesquisa.
+Tratando-se de um estudo transversal baseado em registros
+administrativos, a análise de causalidade estrita é impossibilitada,
+permitindo apenas inferências de associação. Além disso, a estruturação
+dos dados pautada no registro por pessoa, e não no evento/acidente como
+um todo, impõe desafios para isolar a gravidade global da colisão da
+gravidade individual. Notavelmente, o estudo ressente-se da ausência de
+variáveis clínicas e comportamentais contundentes nos boletins de
+ocorrência originais, tais como a velocidade estimada no momento do
+impacto, a confirmação toxicológica do uso de álcool e a utilização de
+equipamentos de segurança (cinto e capacete). A omissão desses fatores,
+que compõem o núcleo duro da letalidade no trânsito, demanda que as
+categorias residuais (como ``Outras'' causas) carreguem o peso
+estatístico desses preditores ocultos.
+
+\section{Conclusão}\label{conclusuxe3o}
+
+\emph{{[}Escreva aqui uma síntese objetiva dos resultados e da resposta
+aos objetivos do estudo, sem introduzir informações novas.{]}}
+
+O presente estudo teve como objetivo central analisar os fatores
+associados à ocorrência de óbitos em sinistros de trânsito registrados
+pela Polícia Rodoviária Federal (PRF) no ano de 2025. A partir de uma
+modelagem multivariada baseada em um contingente robusto de
+aproximadamente 195 mil registros, foi possível isolar o efeito de
+diferentes preditores e compreender a dinâmica da letalidade nas
+rodovias federais brasileiras. Em síntese, os achados demonstram que,
+embora o erro humano seja o principal deflagrador dos sinistros, a
+gravidade do desfecho --- culminando na perda de vidas --- é
+predominantemente governada por fatores ambientais, infraestruturais e
+pela física do impacto (massa e velocidade), sobrepondo-se a
+características demográficas dos condutores, como o gênero, que não
+apresentou relevância estatística no modelo final.
+
+Conclui-se, portanto, que a transição de um sinistro com danos materiais
+ou ferimentos leves para um evento fatal é catalisada por falhas na
+tolerância do sistema viário aos erros humanos. A mitigação da
+letalidade nas rodovias federais brasileiras transcende a mera
+responsabilização do condutor e demanda investimentos urgentes na
+duplicação de vias de pista simples, na regulação rigorosa da circulação
+de veículos pesados e de transporte coletivo, e na intensificação da
+fiscalização em períodos de maior risco comportamental, como noites e
+finais de semana. Os resultados subsidiam tecnicamente a premissa do
+``Sistema Seguro'': a infraestrutura e a regulação devem atuar de forma
+ativa para garantir que as inevitáveis falhas no trânsito não resultem
+em perda de vidas.
+
+\newpage
+
+\section{Referências}\label{referuxeancias}
+
+WORLD HEALTH ORGANIZATION. \textbf{Global status report on road safety
+2023}. Geneva: WHO, 2023. ISBN 978-92-4-008651-7. Disponível em:
+\url{https://www.who.int/publications/i/item/9789240086517}. Acesso em:
+28 abr. 2026. \newline INSTITUTO DE PESQUISA ECONÔMICA APLICADA.
+\textbf{Acidentes de trânsito nas rodovias federais brasileiras:
+caracterização, tendências e custos para a sociedade}. Brasília: Ipea,
+2015. Disponível em:
+\url{https://repositorio.ipea.gov.br/entities/publication/6da39885-db81-4756-ba8a-d26b6d0c0d63}.
+Acesso em: 28 abr. 2026. \newline POLÍCIA RODOVIÁRIA FEDERAL.
+\textbf{Dados abertos de acidentes em rodovias federais --- 2025}.
+Brasília: PRF, 2025. Disponível em:
+\url{https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf}.
+Acesso em: 28 abr. 2026. \newline R CORE TEAM. \textbf{R: A language and
+environment for statistical computing}. Vienna: R Foundation for
+Statistical Computing, 2025. Disponível em:
+\url{https://www.R-project.org/}.
+
+\end{document}
