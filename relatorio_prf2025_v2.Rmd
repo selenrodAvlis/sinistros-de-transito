@@ -521,8 +521,6 @@ kable(med9, booktabs=TRUE, align="lccc", digits=4,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 9 -->
 
-*[Interprete a tabela, o teste e as medidas de associação: a proporção de sinistros fatais difere entre dias úteis e finais de semana/feriados? O RR e o OR indicam maior ou menor risco nos fins de semana?]*
-
 A análise estatística revela que a proporção de sinistros fatais difere entre os dias úteis e os finais de semana/feriados ($p < 0,001$). Através dos dados descritivos (Tabela 9), observa-se que a letalidade é proporcionalmente maior nos finais de semana e feriados (10.85%) do que nos dias úteis (8,98%). A medida de associação do Risco Relativo (RR) de 1,2091 indica que o risco de um sinistro resultar em fatalidade é 20,91% maior durante os fins de semana e feriados em comparação aos dias de semana. Da mesma forma, a Odds Ratio (OR) de 1,2346 mostra que as chances de óbito são elevadas nesse período. Como os intervalos de confiança de 95% para ambas as medidas (RR: 1,1756–1,2436; OR: 1,1966–1,2738) não incluem o valor 1,é possível concluir que os finais de semana e feriados constituem um fator de risco para a ocorrência de sinistros fatais nas rodoviárias ferederais brasileiras.
 
 ### Sinistro Fatal segundo o Tipo de Pista
@@ -570,8 +568,6 @@ kable(med10,
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 10 -->
-
-*[Interprete os resultados: qual tipo de pista apresenta maior proporção de óbitos? O RR e o OR confirmam essa diferença? Os IC 95% excluem o valor nulo?]*
 
 A análise dos dados revela a presença de uma associação entre a configuração da via e a ocorrência de óbitos nos sinistros ($p < 0,001$), refutando a hipótese de que a proporção de sinistros fatais seja uniforme entre as difernetes tipos de pista. Os dados descritivos demonstram que a pista simples apresenta a maior letalidade relativa ($13,32\%$), valor consideravelmente superior aos registrados em pistas duplas ($6,28\%$) e múltiplas ($4,81\%$).As medidas de associação confirmam essa disparidade. Para o Risco Relativo (RR), o valor de 2,12 para a comparação "Simples vs. Dupla" indica que o risco de um sinistro resultar em morte é mais que o dobro (112% superior) em pistas simples quando comparadas às duplas. A Odds Ratio (OR) de 2,29 reforça essa maior chance de fatalidade. Por outro lado, a comparação "Múltipla vs. Dupla" apresenta um RR de 0,76, indicando que as pistas múltiplas possuem um risco 24% menor de óbitos em relação às duplas. Dessa forma, o aumento no numeros de pista diminui considerravelmente o chances de acidentes fatais.
 
@@ -623,8 +619,6 @@ kable(med11,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 11 -->
 
-*[Interprete os resultados: qual causa de acidente apresenta maior proporção de óbitos? As demais categorias têm risco maior ou menor que a falha humana (referência)?]*
-
 A análise estatística evidencia uma associação importante entre a causa presumida do acidente e a letalidade do evento ($p < 0,001$), indicando que a proporção de sinistros fatais difere drasticamente entre as categorias. Utilizando a falha humana do condutor como referência (com $9,65\%$ de óbitos), observa-se que as falhas mecânicas ($RR = 0,37$), a infraestrutura da via ($RR = 0,84$) e os fatores ambientais ($RR = 0,75$) representam um menor risco relativo de morte. Por outro lado, o envolvimento de pedestres ou terceiros aumenta o risco de fatalidade em $68\%$ ($RR = 1,68$), e a categoria "Outros" demonstra o cenário mais severo, com um risco $5,6$ vezes maior ($RR = 5,68$) em relação à falha humana, nescessitando de futuras análise para comprender quais podem ser suas principais influencias.
 
 ### Sinistro Fatal segundo o Sexo
@@ -672,8 +666,6 @@ kable(med12,
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 12 -->
-
-*[Interprete os resultados: o sexo masculino apresenta maior proporção de óbitos? O OR indica diferença relevante em relação ao feminino?]*
 
 Os resultados indicam uma associação entre o gênero e a letalidade dos sinistros ($p < 0,001$), confirmando que a proporção de óbitos não é diferente entre os gêneros. O sexo masculino apresenta uma proporção de óbitos superior ($9,33\%$) à observada no sexo feminino ($8,32\%$). Embora a diferença absoluta pareça pequena ($9,33\%$ vs. $8,32\%$), o teste Qui-Quadrado revela consistencia estatistica para quantificar a diferença não ser fruto do acaso. Pelas medidas de associação, o Risco Relativo (RR) de $1,12$ indica que homens possuem um risco $12\%$ maior de envolvimento em sinitros fatais do que mulheres. A Razão de Chances (OR) de $1,13$ corrobora com essa disparidade, indicando que a chance de óbito é relevantemente maior para o grupo masculino.
 
@@ -723,8 +715,6 @@ kable(med13,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 13 -->
 
-*[Interprete os resultados: qual tipo de veículo apresenta maior risco de óbito em relação ao automóvel/leve? Motocicletas têm RR e OR mais elevados?]*
-
 Os resultados do estudo demonstram uma associação entre o tipo de veículo e a letalidade dos sinistros ($p < 0,001$), evidenciando que a natureza do veículo é um fator determinante sobre a gravidade do aidente e na sobrevivência dos envolvidos. O transporte coletivo apresenta o maior risco de óbito em relação ao automóvel leve, com uma taxa de fatalidade de $21,77\%$ e um Risco Relativo (RR) de $2,99$, indicando que o risco de morte é aproximadamente o triplo em comparação aos veículos leves. Já as motocicletas, nesta base de dados, não apresentam RR e OR mais elevados; pelo contrário, possuem um risco $17\%$ menor ($RR = 0,83$) do que os automóveis. Os veículos pesados e não motorizados também apresentam riscos elevados, com probabilidades de óbito aproximadamente $89\%$ e $85\%$ superiores utilitários leves, respectivamente. Portanto, o RR e o OR indicam que o risco é significativamente maior para ocupantes de transporte coletivo e veículos pesados, enquanto as motocicletas e automóveis figuram com índices comparativamente menores de letalidade nesta analise.
 
 \newpage
@@ -763,8 +753,6 @@ grafico_prop(dados_analise, "tipo_dia", "Tipo de dia")
 
 <!-- ESPAÇO PARA COMENTÁRIO — Gráfico 1 -->
 
-*[Descreva o gráfico: a proporção de sinistros fatais é maior nos finais de semana/feriados ou nos dias úteis? A diferença é visualmente expressiva?]*
-
 A figura 1 derivado dos dados estatísticos do intem 3.2.1 revela que a proporção de sinistros fatais é maior nos finais de semana e feriados, atingindo $10,99\%$, enquanto nos dias úteis esse índice é de $9,16\%$. Embora a variação absoluta seja de aproximadamente $1,83$ pontos percentuais, a diferença representa um aumento relativo de quase $20\%$ no risco de óbito. Essa disparidade sugere que, apesar de os dias úteis concentrarem o maior volume total de sinistros, as ocorrências em finais de semana e feriados tendem a apresentar uma gravidade superior, resultando em uma maior taxa de letalidade por evento.
 
 ### Sinistro Fatal segundo o Tipo de Pista
@@ -774,8 +762,6 @@ grafico_prop(dados_analise, "tipo_pista", "Tipo de pista")
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Gráfico 2 -->
-
-*[Descreva o gráfico: a diferença entre pistas simples e as demais categorias é visualmente marcante?]*
 
 A figura 2 reflete uma disparidade na gravidade dos sinistros conforme o tipo da pista. A barra correspondente à pista simples se destaca de forma isolada, registrando uma proporção de óbitos de $13,32\%$, valor que é mais que o dobro da letalidade observada em pistas duplas ($6,28\%$) e quase o triplo das pistas múltiplas ($4,81\%$). Essa diferença é visualmente observada, criando um nítida diferença que separa a pista simples das demais categorias. Dessa forma, as pistas duplas e múltiplas ofereçem uma segurança relativa maior devido à separação de fluxos, a pista simples configura-se como o cenário de maior criticidade, onde a probabilidade de um sinistro ser fatal é dramaticamente superior.
 
@@ -787,8 +773,6 @@ grafico_prop(dados_analise, "causa_grupo", "Causa do acidente")
 
 <!-- ESPAÇO PARA COMENTÁRIO — Gráfico 3 -->
 
-*[Descreva o gráfico: qual grupo de causas concentra maior proporção de óbitos?]*
-
 O gráfico evidencia uma disparidade entre as diferentes causas de sinistros, com o grupo "Outros" concentrando a maior proporção de óbitos, atingindo impressionantes 54,88%. Essa barra domina visualmente a escala do gráfico, indicando que os eventos classificados nessa categoria possuem uma gravidade desproporcional em relação às demais e concentram situações importante que merecem maior atenção em análises mais detalhadas. Em seguida, destaca-se o grupo Pedestre/terceiros, com uma taxa de fatalidade de 16,23%, o que reforça a vulnerabilidade extrema de usuários não motorizados no trânsito, superando significativamente a média geral de 9,77%. No extremo oposto, a falha mecânica apresenta a menor barra de letalidade (3,63%), sugerindo que, embora perigosos, esses incidentes tendem a resultar em óbitos com frequência muito menor do que aqueles que envolvem o fator humano direto ou a vulnerabilidade física de pedestres.
 
 ### Sinistro Fatal segundo o Sexo
@@ -799,8 +783,6 @@ grafico_prop(dados_analise, "sexo", "Sexo")
 
 <!-- ESPAÇO PARA COMENTÁRIO — Gráfico 4 -->
 
-*[Descreva o gráfico: o sexo masculino apresenta visivelmente maior proporção de óbitos?]*
-
 O gráfico ilustra que o sexo masculino apresenta uma proporção de óbitos superior ($9,33\%$) à observada no sexo feminino ($8,32\%$). Embora essa diferença de $1,01$ ponto percentual entre os gêneros visualmente pouco clara, as analises observadas em 3.2.4 mostra a consistencias dos dados observado nesse gráfico são relevantes. Portanto, a representação visual acompanhada pelo analise estatistica é nescessária para confirma a maior vulnerabilidade masculina em relação à feminina. Vale rerssaltar que o maior índice de fatalidade proporcional ocorre nos casos com preenchimento de gênero incompleto ou alternativo, distanciando-se consideravelmente das médias dos demais grupos.
 
 ### Sinistro Fatal segundo o Tipo de Veículo
@@ -810,8 +792,6 @@ grafico_prop(dados_analise, "tipo_veiculo_grp", "Tipo de veículo")
 ```
 
 <!-- ESPAÇO PARA COMENTÁRIO — Gráfico 5 -->
-
-*[Descreva o gráfico: qual tipo de veículo apresenta maior proporção de óbitos? O padrão é coerente com as medidas de associação?]*
 
 A figura 5 evidencia que o transporte coletivo o maior cenário de gravidade, apresentando a maior proporção de óbitos com 21,77%, o que o isola como o grupo de maior criticidade. Esse padrão visual é coerente com as medidas de associação, especialmente considerando que o transporte coletivo apresentou o maior Risco Relativo (RR = 2,99) e a maior Odds Ratio (OR = 3,54) na análise detalhada. A representação gráfica traduz com precisão a severidade indicada pela estatística: enquanto automóveis e motocicletas apresentam as menores proporções de letalidade (7,28% e 6,02%, respectivamente), os veículos pesados e não motorizados formam um segundo bloco de alto risco, ambos superando os 13%. Assim, o gráfico ratifica que a massa do veículo e a vulnerabilidade do usuário são os principais divisores de águas entre um sinistro apenas com danos e uma fatalidade.
 
@@ -942,8 +922,6 @@ cat(paste0(
 
 <!-- ESPAÇO PARA COMENTÁRIO — Regressão Logística -->
 
-*[Interprete os resultados da regressão logística: quais variáveis permaneceram no modelo após a seleção stepwise? Quais apresentaram OR significativamente diferentes de 1? O diagnóstico de resíduos indica bom ajuste?]*
-
 O modelo inicial foi especificado com sete preditores: fase do dia (fase_dia_dic), condição meterológica (cond_meteo), Tipo de pista (tipo_pista), Causa do acidente (causa_grupo), tipo do dia (tipo_dia), genero (sexo) e tipo do veiculo (tipo_veiculo_grp). O log de saída revela, contudo, que o modelo final mantido pelo algoritmo de seleção algorítmica (stepwise) excluiu a variável sexo. A exclusão da sexo em um procedimento de seleção baseada em critérios de informação (AIC) indica que, quando ajustada pelas demais covariáveis do modelo, a variável sexo não agregou poder preditivo ou explicativo estatisticamente significativo à deviance do modelo. Em termos práticos, a letalidade do sinistro é muito mais governada pelas condições do ambiente, da via e do veículo do que pelo gênero dos envolvidos, principalmetne quando estas outras variáveis estão sendo fatores de controle dentro do modelo. As demais seis variáveis permaneceram no modelo final, todas apresentando significância estatística global no teste de Analysis of Deviance (p \< 0,001).
 
 A avaliação do ajuste global do modelo é baseada na Análise de Deviance. O modelo nulo (sem nenhum preditor) apresentava uma deviance de 112.200 (para 184.083 graus de liberdade). Após a inclusão das variáveis selecionadas, a deviance residual caiu para 103.500 (com 184.068 graus de liberdade). Esta redução de deviance (aprox. 8.700 unidades ao custo de 15 graus de liberdade) sinaliza que o modelo multivariado explica uma parcela importante da variabilidade dos dados em relação ao modelo basal. Além disso, a razão entre a deviance residual e os graus de liberdade residuais (103500 / 184068 ≈ 0,56) indica a ausência de superdispersão (overdispersion), confirmando que a adoção da família binomial com função de ligação logit foi adequada para a natureza dos dados. A tabela de ANOVA sequencial demonstra que cada bloco de variáveis inserido contribuiu para o ajuste final (p \< 0,001).
@@ -965,8 +943,6 @@ ESPAÇO PARA COMENTÁRIO — Discussão Geral
 ```
 
 O presente estudo analisou os fatores associados à ocorrência de óbito em sinistros de trânsito registrados pela Polícia Rodoviária Federal (PRF) no ano de 2025, a partir de 194.622 registros individuais. A proporção de sinistros fatais observada foi de 9,77%, o que, embora represente uma minoria dos eventos, corresponde a um número absoluto expressivo de óbitos e configura um relevante problema de saúde pública. O desbalanceamento entre as categorias do desfecho não comprometeu a modelagem logística, dado o elevado tamanho amostral. Antes da análise principal, foram excluídos os registros cuja causa do acidente foi classificada como "Suicídio (presumido)" ou "Transtornos Mentais", por se tratarem de eventos de natureza intencional, não comparáveis aos demais sinistros de trânsito. A inclusão dessas categorias distorceria as medidas de associação, uma vez que a proporção de óbitos nesses eventos é próxima de 100%, inflacionando artificialmente o OR da variável causa do acidente no modelo logístico. Entre os fatores analisados, o tipo de pista mostrou-se o mais consistentemente associado à ocorrência de óbito. Sinistros em pistas simples apresentaram proporção de fatalidade de 13,32%, mais que o dobro da observada em pistas múltiplas (4,81%), com OR ajustado de 2,30 (IC 95%: 2,21–2,39). Esse resultado é coerente com as características estruturais das pistas simples — uma única faixa por sentido, sem separação física entre fluxos opostos —, que favorecem colisões frontais, reconhecidamente o tipo de acidente de maior letalidade. Adicionalmente, pistas simples tendem a estar localizadas em trechos mais remotos, onde o tempo de resposta do socorro médico é maior, o que pode contribuir para a maior letalidade independentemente das características do acidente. O efeito do tipo de pista permaneceu significativo e de grande magnitude após ajuste pelas demais variáveis no modelo logístico, indicando que se trata de um fator independente e robusto. O tipo de veículo foi o fator com maior OR isolado no modelo. Sinistros envolvendo transporte coletivo apresentaram OR ajustado de 3,18 (IC 95%: 2,99–3,37), indicando chance de óbito mais de três vezes maior em relação a automóveis e utilitários leves. Veículos pesados também apresentaram OR elevado (2,14; IC 95%: 2,06–2,23). Esses resultados refletem a maior energia cinética envolvida em acidentes com veículos de grande porte, bem como o potencial de envolver múltiplas vítimas em um único evento. Deve-se considerar, entretanto, que os dados estão organizados por pessoa e não por acidente, o que significa que um único sinistro grave com ônibus pode gerar múltiplos registros de óbito, inflacionando a proporção de fatalidade associada a essa categoria. Motocicletas apresentaram OR ligeiramente inferior ao do automóvel (0,91; IC 95%: 0,87–0,96), resultado contraintuitivo dado o reconhecido perfil de vulnerabilidade dos motociclistas. Uma hipótese plausível é que acidentes de motocicleta nas rodovias federais, embora frequentes, tendam a envolver velocidades e energias menores do que colisões entre veículos pesados, além de frequentemente envolverem apenas o próprio motociclista. Em relação à causa do acidente, a falha humana do condutor foi a categoria mais frequente, o que reflete tanto a realidade epidemiológica dos acidentes de trânsito quanto possíveis limitações na classificação realizada pelo agente no local. Acidentes classificados como envolvendo pedestres e terceiros apresentaram OR ajustado de 1,37 (IC 95%: 1,29–1,46), indicando maior chance de óbito em relação à falha humana do condutor — resultado esperado dado o perfil de vulnerabilidade dos pedestres em vias de alta velocidade. Por outro lado, falha mecânica (OR = 0,32) e falha na via/infraestrutura (OR = 0,75) estiveram associadas a menor chance de óbito, possivelmente porque esses eventos tendem a gerar acidentes de menor cinética, como paradas súbitas e saídas de pista a baixa velocidade, em comparação com colisões frontais por erro humano. O tipo de dia mostrou associação independente com o desfecho, com sinistros ocorridos em finais de semana e feriados apresentando OR ajustado de 1,22 (IC 95%: 1,17–1,26) em relação aos dias úteis. Embora de magnitude moderada, esse resultado é consistente com a literatura que associa esses períodos a comportamentos de maior risco — como velocidade incompatível, consumo de álcool e fadiga em viagens longas —, variáveis que não estão disponíveis nesta base de dados mas que provavelmente contribuem para o padrão observado. A fase do dia também se mostrou relevante: sinistros ocorridos durante o pleno dia apresentaram OR ajustado de 0,57 (IC 95%: 0,55–0,58), indicando que outros horários — noturno, crepúsculo e amanhecer — estão associados a chance de óbito 43% maior. A redução da visibilidade, a maior prevalência de fadiga e a possível maior velocidade praticada em períodos de menor volume de tráfego são fatores explicativos plausíveis. A condição meteorológica, por sua vez, não apresentou associação de relevância prática com o desfecho no modelo ajustado. Os OR para tempo adverso (0,96; IC 95%: 0,90–1,02) e tempo bom (1,04; IC 95%: 1,00–1,09) foram próximos de 1, com intervalos de confiança que incluem ou tangenciam o valor nulo. Uma explicação plausível é que em condições meteorológicas adversas os condutores tendem a adotar comportamento mais cauteloso — reduzindo a velocidade e aumentando a atenção —, o que reduz a gravidade dos acidentes que eventualmente ocorrem. Esse resultado ilustra a distinção entre exposição e risco: embora a maioria dos acidentes ocorra em tempo bom, isso se deve à maior frequência desse tipo de condição, e não a um maior risco por evento. O diagnóstico do modelo indicou bom ajuste global aos dados, com qui-quadrado de Pearson de 181.491,1 (gl = 183.529; p = 0,783) e qui-quadrado deviance de 102.848,8 (gl = 183.529; p = 1,000). Todas as variáveis foram mantidas pelo critério AIC no processo de seleção stepwise, indicando que cada uma contribui de forma independente para a explicação do desfecho. Do ponto de vista metodológico, algumas limitações merecem ser consideradas. O delineamento transversal impede o estabelecimento de relações causais — os resultados devem ser interpretados como associações. A ausência de variáveis como velocidade, uso de cinto de segurança e consumo de álcool representa uma limitação relevante, uma vez que esses fatores são determinantes conhecidos da gravidade dos acidentes e estão correlacionados com as variáveis analisadas, podendo gerar confundimento residual. Adicionalmente, a estrutura dos dados por pessoa — e não por acidente — introduz dependência entre as observações de um mesmo sinistro, violando o pressuposto de independência da regressão logística padrão; para uma análise mais rigorosa, seria recomendável o uso de modelos com efeitos mistos com clustering por acidente. Por fim, o elevado tamanho amostral (n ≈ 184 mil) confere poder estatístico máximo aos testes, tornando virtualmente qualquer diferença estatisticamente significativa. Nesse contexto, as medidas de efeito — OR, RR e RA — e seus intervalos de confiança são critérios mais informativos do que os p-valores para avaliar a relevância prática das associações encontradas.
-
-*Destaques para serem discutidos: A Urgência da Segregação de Fluxo (Pista Simples); A magnitude da letalidade atrelada a Transporte Coletivo e Veículos Pesados, Iluminação e Fiscalização concentrar-se fora da luz do dia e nos finais de semana; Vulnerabilidade para veículos especiais/não motorizados*
 
 # Conclusão
 
