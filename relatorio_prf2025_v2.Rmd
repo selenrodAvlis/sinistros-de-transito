@@ -508,7 +508,7 @@ M9 <- matrix(c(t9["Dia útil","Não"], t9["Dia útil","Sim"],
              nrow=2, byrow=TRUE)
 med9 <- medidas_dic(M9, "Dia útil", "Final de semana / feriado")
 
-kable(med9, booktabs=TRUE, align="lccc", digits=4,
+kable(med9, booktabs=TRUE, align="lccc", digits=2,
       caption="Medidas de associação: sinistro fatal segundo o tipo de dia — PRF, 2025.") %>%
   kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
   footnote(general="Referência: Dia útil. Fonte: Elaborado pelos autores.",
@@ -517,7 +517,7 @@ kable(med9, booktabs=TRUE, align="lccc", digits=4,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 9 -->
 
-A análise estatística revelou associação significativa entre o tipo de dia e a ocorrência de sinistros fatais (p\<0,001). Conforme apresentado na Tabela 9, a proporção de sinistros fatais foi maior nos finais de semana e feriados (10,85%) em comparação aos dias úteis (8,98%).O Razão de prevalências (RP = 1,21; IC 95%: 1,17–1,24) indica que, nos finais de semana e feriados, a probabilidade de um sinistro resultar em fatalidade foi aproximadamente 20,9% maior em relação aos dias úteis. De forma consistente, a Odds Ratio (OR = 1,23; IC 95%: 1,20–1,27) demonstra maiores chances de ocorrência de fatalidade nesse período.Como os intervalos de confiança de 95% para RP e OR não incluem o valor 1, reforça-se a evidência de associação estatisticamente significativa entre finais de semana/feriados e maior proporção de sinistros fatais nas rodovias federais brasileiras.
+A análise estatística revelou associação significativa entre o tipo de dia e a ocorrência de sinistros fatais (p\<0,001). Conforme apresentado na Tabela 9, a proporção de sinistros fatais foi maior nos finais de semana e feriados (10,85%) em comparação aos dias úteis (8,98%).O Razão de prevalências (RP = 1,21; IC 95%: 1,18–1,24) indica que, nos finais de semana e feriados, a probabilidade de um sinistro resultar em fatalidade foi aproximadamente 20,9% maior em relação aos dias úteis. De forma consistente, a Odds Ratio (OR = 1,23; IC 95%: 1,20–1,27) demonstra maiores chances de ocorrência de fatalidade nesse período.Como os intervalos de confiança de 95% para RP e OR não incluem o valor 1, reforça-se a evidência de associação estatisticamente significativa entre finais de semana/feriados e maior proporção de sinistros fatais nas rodovias federais brasileiras.
 
 ### Sinistro Fatal segundo o Tipo de Pista
 
@@ -552,7 +552,7 @@ general = "Referência: Dupla. Fonte: Elaborado pelos autores."
 kable(med10,
       booktabs=TRUE,
       align="lcccccc",
-      digits=4,
+      digits=2,
       caption= caption) %>%
   kable_styling(latex_options=c("hold_position", "striped"),
                 font_size=10) %>%
@@ -565,7 +565,7 @@ kable(med10,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 10 -->
 
-A análise dos dados revelou associação estatisticamente significativa entre o tipo de pista e a ocorrência de sinistros fatais (p\<0,001), rejeitando a hipótese de uniformidade na proporção de fatalidade entre as diferentes configurações de via. Os resultados descritivos mostram que pistas simples apresentaram a maior proporção de sinistros fatais (13,13%), valor superior ao observado em pistas duplas (6,15%) e múltiplas (4,59%). As medidas de associação reforçam esse padrão. Na comparação entre pistas simples e duplas, o Razão de prevalências (RP = 2,14; IC95%: 2,07–2,20) indica que a probabilidade de um sinistro resultar em fatalidade foi aproximadamente 113,6% maior em pistas simples. De forma consistente, a Odds Ratio (OR = 2,31; IC 95%: 2,23–2,39) evidencia maiores chances de fatalidade nesse tipo de via. Já na comparação entre pistas múltiplas e duplas, o RP de 0,75 (IC95%: 0,69–0,80) sugere menor proporção de sinistros fatais em pistas múltiplas, correspondendo a uma redução relativa aproximada de 25,3% em relação às pistas duplas. Assim, observa-se associação entre configurações viárias com menor número de faixas e maior proporção de sinistros fatais nas rodovias federais brasileiras.
+A análise dos dados revelou associação estatisticamente significativa entre o tipo de pista e a ocorrência de sinistros fatais (p\<0,001), rejeitando a hipótese de uniformidade na proporção de fatalidade entre as diferentes configurações de via. Os resultados descritivos mostram que pistas simples apresentaram a maior proporção de sinistros fatais (13,13%), valor superior ao observado em pistas duplas (6,15%) e múltiplas (4,59%). As medidas de associação reforçam esse padrão. Na comparação entre pistas simples e duplas, o Razão de prevalências (RP = 2,14; IC95%: 2,07–2,21) indica que a probabilidade de um sinistro resultar em fatalidade foi aproximadamente 113,6% maior em pistas simples. De forma consistente, a Odds Ratio (OR = 2,31; IC 95%: 2,23–2,39) evidencia maiores chances de fatalidade nesse tipo de via. Já na comparação entre pistas múltiplas e duplas, o RP de 0,75 (IC 95%: 0,69–0,80) sugere menor proporção de sinistros fatais em pistas múltiplas, correspondendo a uma redução relativa aproximada de 25,3% em relação às pistas duplas. Assim, observa-se associação entre configurações viárias com menor número de faixas e maior proporção de sinistros fatais nas rodovias federais brasileiras.
 
 ### Sinistro Fatal segundo a Causa do Acidente
 
@@ -602,7 +602,7 @@ general = "Referência: Falha humana do condutor. Fonte: Elaborado pelos autores
 kable(med11,
       booktabs=TRUE,
       align="lcccccc",
-      digits=4,
+      digits=2,
       caption= caption) %>%
   kable_styling(latex_options=c("hold_position", "striped"),
                 font_size=10) %>%
@@ -615,7 +615,7 @@ kable(med11,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 11 -->
 
-A análise estatística evidenciou associação significativa entre a causa presumida do acidente e a ocorrência de sinistros fatais (p\<0,001), indicando diferenças na proporção de fatalidade entre as categorias analisadas. Utilizando falha humana do condutor como categoria de referência (9,65% de sinistros fatais), observou-se menor proporção de fatalidade em acidentes atribuídos à falha mecânica do veículo (3,63%; RP = 0,38; IC 95%: 0,34–0,41), falha na via/infraestrutura (8,16%; RP = 0,84; IC 95%: 0,79–0,90) e fatores ambientais (7,30%; RP = 0,75; IC95%: 0,67–0,85). Em contraste, acidentes envolvendo pedestres ou terceiros apresentaram maior proporção de sinistros fatais (16,23%), com razão de prevalências 68,2% superior ao observado em acidentes atribuídos à falha humana do condutor (RP = 1,68; IC 95%: 1,61–1,75). Dessa forma, os resultados sugerem que acidentes envolvendo pedestres ou terceiros estão associados a maior gravidade quando comparados às demais causas presumidas analisadas.
+A análise estatística evidenciou associação significativa entre a causa presumida do acidente e a ocorrência de sinistros fatais (p\<0,001), indicando diferenças na proporção de fatalidade entre as categorias analisadas. Utilizando falha humana do condutor como categoria de referência (9,65% de sinistros fatais), observou-se menor proporção de fatalidade em acidentes atribuídos à falha mecânica do veículo (3,63%; RP = 0,38; IC 95%: 0,34–0,41), falha na via/infraestrutura (8,16%; RP = 0,85; IC 95%: 0,79–0,91) e fatores ambientais (7,30%; RP = 0,76; IC 95%: 0,67–0,85). Em contraste, acidentes envolvendo pedestres ou terceiros apresentaram maior proporção de sinistros fatais (16,23%), com razão de prevalências 68,2% superior ao observado em acidentes atribuídos à falha humana do condutor (RP = 1,68; IC 95%: 1,61–1,75). Dessa forma, os resultados sugerem que acidentes envolvendo pedestres ou terceiros estão associados a maior gravidade quando comparados às demais causas presumidas analisadas.
 
 ### Sinistro Fatal segundo o Sexo
 
@@ -650,7 +650,7 @@ general = "Referência: Feminino. Fonte: Elaborado pelos autores."
 kable(med12,
       booktabs=TRUE,
       align="lcccccc",
-      digits=4,
+      digits=2,
       caption= caption) %>%
   kable_styling(latex_options=c("hold_position", "striped"),
                 font_size=10) %>%
@@ -663,7 +663,7 @@ kable(med12,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 12 -->
 
-Os resultados indicam associação estatisticamente significativa entre sexo e ocorrência de sinistros fatais (p\<0,001), sugerindo diferenças na proporção de fatalidade entre os grupos analisados. Observou-se maior proporção de sinistros fatais entre indivíduos do sexo masculino (9,18%) em comparação ao sexo feminino (8,22%). Embora a diferença absoluta seja relativamente pequena, o teste Qui-Quadrado de Pearson indicou evidência estatística de associação, sugerindo que essa diferença dificilmente é atribuída ao acaso. Considerando o sexo feminino como referência, o Razão de prevalências (RP = 1,12; IC 95%: 1,08–1,15) indica que, entre os registros analisados, sinistros envolvendo indivíduos do sexo masculino apresentaram probabilidade aproximadamente 11,7% maior de resultar em fatalidade. De forma consistente, a Odds Ratio (OR = 1,13; IC 95%: 1,08–1,17) também aponta maiores chances de fatalidade nesse grupo.
+Os resultados indicam associação estatisticamente significativa entre sexo e ocorrência de sinistros fatais (p\<0,001), sugerindo diferenças na proporção de fatalidade entre os grupos analisados. Observou-se maior proporção de sinistros fatais entre indivíduos do sexo masculino (9,18%) em comparação ao sexo feminino (8,22%). Embora a diferença absoluta seja relativamente pequena, o teste Qui-Quadrado de Pearson indicou evidência estatística de associação, sugerindo que essa diferença dificilmente é atribuída ao acaso. Considerando o sexo feminino como referência, o Razão de prevalências (RP = 1,12; IC 95%: 1,08–1,16) indica que, entre os registros analisados, sinistros envolvendo indivíduos do sexo masculino apresentaram probabilidade aproximadamente 12% maior de resultar em fatalidade. De forma consistente, a Odds Ratio (OR = 1,13; IC 95%: 1,08–1,17) também aponta maiores chances de fatalidade nesse grupo.
 
 ### Sinistro Fatal segundo o Tipo de Veículo
 
@@ -698,7 +698,7 @@ general = "Referência: Automóvel / utilitário leve. Fonte: Elaborado pelos au
 kable(med13,
       booktabs=TRUE,
       align="lcccccc",
-      digits=4,
+      digits=2,
       caption= caption) %>%
   kable_styling(latex_options=c("hold_position", "striped"),
                 font_size=10) %>%
@@ -711,7 +711,7 @@ kable(med13,
 
 <!-- ESPAÇO PARA COMENTÁRIO — Tabela 13 -->
 
-Os resultados evidenciaram associação estatisticamente significativa entre tipo de veículo e ocorrência de sinistros fatais (p\<0,001), indicando diferenças na proporção de fatalidade entre as categorias analisadas. Entre os tipos de veículo avaliados, o transporte coletivo apresentou a maior proporção de sinistros fatais (21,38%), seguido por veículos pesados (13,48%) e veículos não motorizados/especiais (13,42%), todos superiores ao observado para automóveis/utilitários leves (7,22%). Considerando automóveis/utilitários leves como categoria de referência, o transporte coletivo apresentou o maior razão de prevalências (RP = 2,96; IC 95%: 2,83–3,10), indicando probabilidade aproximadamente três vezes maior de o sinistro resultar em fatalidade. De forma consistente, a Odds Ratio (OR = 3,49; IC 95%: 3,30–3,70) também evidenciou maior chance de fatalidade nessa categoria. Veículos pesados (RP = 1,87; IC 95%: 1,80–1,93) e veículos não motorizados/especiais (RP = 1,86; IC 95%: 1,65–2,09) também apresentaram maior proporção de sinistros fatais em comparação à categoria de referência. Em contraste, motocicletas apresentaram menor proporção de sinistros fatais (5,98%), com RP = 0,83 (IC 95%: 0,79–0,86), indicando menor probabilidade relativa de fatalidade em comparação aos automóveis/utilitários leves nos registros analisados.
+Os resultados evidenciaram associação estatisticamente significativa entre tipo de veículo e ocorrência de sinistros fatais (p\<0,001), indicando diferenças na proporção de fatalidade entre as categorias analisadas. Entre os tipos de veículo avaliados, o transporte coletivo apresentou a maior proporção de sinistros fatais (21,38%), seguido por veículos pesados (13,48%) e veículos não motorizados/especiais (13,42%), todos superiores ao observado para automóveis/utilitários leves (7,22%). Considerando automóveis/utilitários leves como categoria de referência, o transporte coletivo apresentou o maior razão de prevalências (RP = 2,96; IC 95%: 2,83–3,10), indicando probabilidade aproximadamente três vezes maior de o sinistro resultar em fatalidade. De forma consistente, a Odds Ratio (OR = 3,50; IC 95%: 3,30–3,70) também evidenciou maior chance de fatalidade nessa categoria. Veículos pesados (RP = 1,87; IC 95%: 1,80–1,93) e veículos não motorizados/especiais (RP = 1,86; IC 95%: 1,65–2,09) também apresentaram maior proporção de sinistros fatais em comparação à categoria de referência. Em contraste, motocicletas apresentaram menor proporção de sinistros fatais (5,98%), com RP = 0,83 (IC 95%: 0,79–0,87), indicando menor probabilidade relativa de fatalidade em comparação aos automóveis/utilitários leves nos registros analisados.
 
 ### Sinistro Fatal segundo a Condição metereológica
 
@@ -748,15 +748,17 @@ general = "Referência: Tempo bom. Fonte: Elaborado pelos autores."
 kable(med14,
       booktabs=TRUE,
       align="lccc",
-      digits=4,
+      digits=2,
       caption= caption) %>%
   kable_styling(latex_options=c("hold_position", "striped"),
-                font_size=10) %>%
+                font_size=10,
+                full_width = FALSE) %>%
   column_spec(1,
               width = "3cm") %>% 
   footnote(general= general,
            general_title="",
-           footnote_as_chunk=TRUE)
+           footnote_as_chunk=FALSE,
+           threeparttable = TRUE)
 
 ```
 
@@ -794,7 +796,7 @@ M15 <- matrix(c(t15["Outros horários","Não"], t15["Outros horários","Sim"],
              nrow=2, byrow=TRUE)
 med15 <- medidas_dic(M15, "Outros horários", "Pleno dia")
 
-kable(med15, booktabs=TRUE, align="lccc", digits=4,
+kable(med15, booktabs=TRUE, align="lccc", digits=2,
       caption="Medidas de associação: sinistro fatal segundo a Fase do dia — PRF, 2025.") %>%
   kable_styling(latex_options=c("hold_position","striped"), font_size=11) %>%
   footnote(general="Referência: Dia útil. Fonte: Elaborado pelos autores.",
@@ -947,8 +949,8 @@ p_fmt <- ifelse(s[,4] < 0.001, "< 0,001",
 
 tab_reg <- data.frame(
   Variável      = rownames(s),
-  Estimativa    = round(s[,1], 4),
-  `Erro Padrão` = round(s[,2], 4),
+  Estimativa    = round(s[,1], 2),
+  `Erro Padrão` = round(s[,2], 2),
   `z`           = round(s[,3], 2),
   `p-valor`     = p_fmt,
   check.names   = FALSE
@@ -981,9 +983,9 @@ coefs  <- coef(ajust_step)
 ic_mod <- confint.default(ajust_step)
 OR_tab <- data.frame(
   Variável    = names(coefs)[-1],
-  OR          = round(exp(coefs[-1]), 4),
-  `IC 95% LI` = round(exp(ic_mod[-1, 1]), 4),
-  `IC 95% LS` = round(exp(ic_mod[-1, 2]), 4),
+  OR          = round(exp(coefs[-1]), 2),
+  `IC 95% LI` = round(exp(ic_mod[-1, 1]), 2),
+  `IC 95% LS` = round(exp(ic_mod[-1, 2]), 2),
   check.names = FALSE
 )
 
